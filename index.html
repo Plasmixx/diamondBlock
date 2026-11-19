@@ -96,7 +96,6 @@ html.lenis,html.lenis body{height:auto}
       <a id="download" href="#waitlist" class="btn y shimmer"><i data-lucide="download" class="w-5 h-5 inline-block mr-2 align-[-4px]"></i>Get notified when it launches</a>
       <a href="https://github.com/Plasmixx/diamondBlock" class="btn bg-white"><i data-lucide="git-branch" class="w-5 h-5 inline-block mr-2 align-[-4px]"></i>View Source on GitHub</a>
     </div>
-    <p id="gh" class="mt-5 hidden font-medium text-sm"></p>
   </div>
 </section>
 
@@ -548,15 +547,6 @@ document.getElementById('back-block').addEventListener('click',function(){s3.hid
 /* Waitlist: no backend yet, so it opens the visitor's mail app */
 var wf=document.getElementById('waitlist-form');
 if(wf)wf.addEventListener('submit',function(e){e.preventDefault();var em=document.getElementById('waitlist-email').value.trim();if(!em)return;window.location.href='mailto:hello@mocosignup.com?subject=diamondBlock%20waitlist&body=Please%20add%20'+encodeURIComponent(em)+'%20to%20the%20diamondBlock%20waitlist.';document.getElementById('waitlist-msg').textContent='Thanks — your mail app should open. Hit send to join the waitlist.';});
-  /* GitHub REST API: live repo stats and latest release */
-  var gh=document.getElementById('gh'),dl=document.getElementById('download');
-  if(gh&&window.fetch){
-    var base='https://api.github.com/repos/Plasmixx/diamondBlock';
-    fetch(base).then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(d){
-      gh.textContent=d.stargazers_count+' stars, '+d.forks_count+' forks, last updated '+new Date(d.pushed_at).toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'});
-      gh.classList.remove('hidden');
-     }).catch(function(){});
-  }
   var sp=document.getElementById('support');
   if(sp)sp.addEventListener('click',function(e){
     if(sp.getAttribute('href')==='#')e.preventDefault();
