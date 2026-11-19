@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>diamondBlock — free, open-source app blocker</title>
+<meta name="description" content="diamondBlock is a 100% free, open-source app blocker. No paywalls, no tracking.">
+<meta name="color-scheme" content="light">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<style>
+:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:5rem}
+body{background:#fff;color:#0A0A0A;font-family:Inter,system-ui,sans-serif}
+h1,h2,h3,.disp{font-family:'Space Grotesk',system-ui,sans-serif}
+.box{border:2px solid #0A0A0A;box-shadow:6px 6px 0 #0A0A0A;background:#fff}
+.btn{display:inline-block;border:2px solid #0A0A0A;box-shadow:4px 4px 0 #0A0A0A;font-weight:600;padding:.75rem 1.25rem;transition:transform .1s,box-shadow .1s;text-align:center}
+.btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 #0A0A0A}
+.btn:active{transform:translate(4px,4px);box-shadow:0 0 0 #0A0A0A}
+.btn:focus-visible,a:focus-visible{outline:3px solid #0A0A0A;outline-offset:3px}
+.y{background:#FFD600}
+#stage{position:relative;height:300px;overflow:hidden;background:#fff}
+@media(max-width:640px){#stage{height:230px}}
+#cv{position:absolute;inset:0;width:100%;height:100%;display:block}
+#hl{opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s}
+#hl.on{opacity:1;transform:none}
+@keyframes shake{0%,100%{transform:translate(0)}20%{transform:translate(-7px,4px)}40%{transform:translate(6px,-5px)}60%{transform:translate(-4px,-3px)}80%{transform:translate(3px,3px)}}
+.shake{animation:shake .32s linear}
+.shimmer{position:relative;overflow:hidden}
+.shimmer::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.8) 50%,transparent 65%);transform:translateX(-100%);animation:sh 2.6s ease-in-out infinite}
+@keyframes sh{to{transform:translateX(100%)}}
+.marquee{display:flex;overflow:hidden;border-block:2px solid #0A0A0A;background:#FFD600}
+.mq{display:flex;gap:1rem;padding:.9rem 1rem .9rem 0;flex-shrink:0;min-width:100%;justify-content:space-around;animation:mq 30s linear infinite}
+@keyframes mq{to{transform:translateX(-100%)}}
+.chip{display:flex;align-items:center;gap:.5rem;background:#fff;border:2px solid #0A0A0A;box-shadow:3px 3px 0 #0A0A0A;padding:.35rem .9rem;font-weight:600;white-space:nowrap}
+@media(prefers-reduced-motion:reduce){.shake{animation:none}#hl{transition:none}.shimmer::after,.mq,.breathe{animation:none}}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-stopped{overflow:hidden}
+#tt{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;background:rgba(10,10,10,.72);padding:1rem}
+#tt.open{display:flex}
+.phone{position:relative;overflow:hidden;width:min(320px,100%);height:min(560px,86vh);background:#0A0A0A;border:2px solid #0A0A0A;box-shadow:8px 8px 0 #FFD600}
+.scr{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1.5rem}
+.scr[hidden]{display:none}
+@keyframes breathe{50%{transform:scale(1.15)}}
+.breathe{animation:breathe 4s ease-in-out infinite}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="gem" viewBox="0 0 40 40">
+    <polygon points="11,5 29,5 38,15 20,36 2,15" fill="#FFD600" stroke="#0A0A0A" stroke-width="2.5" stroke-linejoin="miter"/>
+    <path d="M2 15H38M11 5L15 15L20 36L25 15L29 5M15 15L20 5L25 15" fill="none" stroke="#0A0A0A" stroke-width="2" stroke-linejoin="miter"/>
+  </symbol>
+</svg>
+
+<div class="bg-[#0A0A0A] text-white text-sm py-2 px-4 flex items-center justify-center gap-3 flex-wrap text-center">
+  <span>See what happens when your thumb reaches for the feed.</span>
+  <button id="simtt" class="y text-[#0A0A0A] font-semibold border-2 border-white px-3 py-1 hover:bg-white"><i data-lucide="smartphone" class="w-4 h-4 inline-block mr-1 align-[-3px]"></i>Simulate opening TikTok</button>
+</div>
+<header class="sticky top-0 z-30 bg-white border-b-2 border-[#0A0A0A]" style="top:env(safe-area-inset-top,0px)">
+  <nav class="max-w-6xl mx-auto flex items-center justify-between gap-3 px-4 py-3">
+    <a href="#top" class="flex items-center gap-2 disp font-bold text-xl" aria-label="diamondBlock home">
+      <svg class="w-8 h-8"><use href="#gem"/></svg>diamondBlock
+    </a>
+    <div class="hidden md:flex items-center gap-7 font-medium">
+      <a href="#features" class="hover:underline">Features</a>
+      <a href="#open-source" class="hover:underline">Open Source</a>
+      <a href="#donate" class="hover:underline">Donate</a>
+      <a href="https://github.com/Plasmixx/diamondBlock" class="hover:underline">GitHub</a>
+    </div>
+    <a href="#download" class="btn y !py-2 !px-4 text-sm sm:text-base">Download Free</a>
+  </nav>
+</header>
+
+<main id="top">
+<section class="max-w-6xl mx-auto px-4 pt-8 sm:pt-12 pb-14">
+  <div id="wrap" class="box">
+    <div id="stage"><canvas id="cv" role="img" aria-label="A yellow and black F1 car smashes through a TikTok logo, scattering colorful shards"></canvas></div>
+  </div>
+  <div class="mt-3 flex justify-end">
+    <button id="replay" class="font-semibold underline underline-offset-4 hover:no-underline">Replay Crash</button>
+  </div>
+
+  <div id="hl" class="mt-4 max-w-3xl">
+    <h1 class="text-4xl sm:text-6xl font-bold leading-[1.02] tracking-tight">Break the scroll cycle. Forever free.</h1>
+    <p class="mt-5 text-lg sm:text-xl max-w-2xl">diamondBlock is a 100% free, open-source app blocker. Zero paywalls, no accounts, no tracking. Just you, taking your time back from the feed.</p>
+    <div class="mt-7 flex flex-col sm:flex-row gap-4">
+      <a id="download" href="https://github.com/Plasmixx/diamondBlock/releases" class="btn y shimmer"><i data-lucide="download" class="w-5 h-5 inline-block mr-2 align-[-4px]"></i>Download diamondBlock</a>
+      <a href="https://github.com/Plasmixx/diamondBlock" class="btn bg-white"><i data-lucide="git-branch" class="w-5 h-5 inline-block mr-2 align-[-4px]"></i>View Source on GitHub</a>
+    </div>
+    <p id="gh" class="mt-5 hidden font-medium text-sm"></p>
+  </div>
+</section>
+
+<section aria-label="Apps diamondBlock blocks" class="mb-16">
+  <div class="marquee"><div class="mq">
+    <span class="chip"><i data-lucide="music-2" class="w-5 h-5"></i>TikTok</span>
+    <span class="chip"><i data-lucide="clapperboard" class="w-5 h-5"></i>Instagram Reels</span>
+    <span class="chip"><i data-lucide="play" class="w-5 h-5"></i>YouTube Shorts</span>
+    <span class="chip"><i data-lucide="at-sign" class="w-5 h-5"></i>X</span>
+    <span class="chip"><i data-lucide="message-circle" class="w-5 h-5"></i>Reddit</span>
+    <span class="chip"><i data-lucide="ghost" class="w-5 h-5"></i>Snapchat</span>
+  </div></div>
+</section>
+
+<section id="features" class="max-w-6xl mx-auto px-4 pb-16">
+  <h2 class="text-3xl sm:text-4xl font-bold mb-8">Why diamondBlock</h2>
+  <div class="grid gap-6 md:grid-cols-3">
+    <article class="box p-6">
+      <div class="flex items-center justify-between mb-4"><svg class="w-10 h-10"><use href="#gem"/></svg><i data-lucide="lock-open" class="w-7 h-7"></i></div>
+      <h3 class="text-xl font-bold mb-2">Zero paywalls or Pro tiers</h3>
+      <p>Opal charges up to $99 a year. With diamondBlock, every focus schedule, strict block, and deep-work mode is unlocked for everyone from day one.</p>
+    </article>
+    <article id="open-source" class="box p-6">
+      <div class="flex items-center justify-between mb-4"><svg class="w-10 h-10"><use href="#gem"/></svg><i data-lucide="shield-check" class="w-7 h-7"></i></div>
+      <h3 class="text-xl font-bold mb-2">100% open source and local-first</h3>
+      <p>Audit every line of code on GitHub. Your screen-time data never leaves your device: no accounts, no analytics, no tracking.</p>
+    </article>
+    <article class="box p-6">
+      <div class="flex items-center justify-between mb-4"><svg class="w-10 h-10"><use href="#gem"/></svg><i data-lucide="timer" class="w-7 h-7"></i></div>
+      <h3 class="text-xl font-bold mb-2">Unbreakable focus modes</h3>
+      <p>Strict app locks, custom schedules, and intentional friction delays stop autopilot TikTok and Reels scrolling cold.</p>
+    </article>
+  </div>
+</section>
+
+<section id="donate" class="max-w-6xl mx-auto px-4 pb-20">
+  <div class="y border-2 border-[#0A0A0A] p-7 sm:p-12" style="box-shadow:8px 8px 0 #0A0A0A">
+    <h2 class="text-3xl sm:text-5xl font-bold max-w-2xl leading-tight">No tiers. No perks. Just support.</h2>
+    <p class="mt-5 text-lg max-w-2xl">diamondBlock is completely free and open source. Donating doesn't unlock secret features or special badges—you already have the full app. If diamondBlock saved your time, feel free to chip in to show support and help keep the project alive.</p>
+    <div class="mt-7 flex flex-col sm:flex-row sm:items-center gap-5">
+      <!-- TODO: replace # with your Buy Me a Coffee or Patreon link -->
+      <a id="support" href="#" class="btn bg-[#0A0A0A] !text-white" style="box-shadow:4px 4px 0 #fff"><i data-lucide="heart" class="w-5 h-5 inline-block mr-2 align-[-4px]"></i>Support diamondBlock</a>
+      <p class="font-medium max-w-sm">Donations offer no perks or advantages to anyone who gives, but they mean the world to us.</p>
+    </div>
+  </div>
+</section>
+
+<section id="compare" class="max-w-6xl mx-auto px-4 pb-20">
+  <h2 class="text-3xl sm:text-4xl font-bold mb-8">What focus costs you</h2>
+  <div class="grid gap-6 md:grid-cols-2">
+    <article class="box p-6 sm:p-8">
+      <p class="font-semibold">Leading app blocker</p>
+      <p class="disp text-5xl sm:text-6xl font-bold mt-2">$99.99<span class="text-xl font-medium">/yr</span></p>
+      <p class="mt-1 text-sm">$<span id="cost5">499.95</span> over five years</p>
+      <ul class="mt-6 space-y-3">
+        <li class="flex gap-3"><i data-lucide="x" class="w-5 h-5 shrink-0 mt-0.5"></i>Full features need a paid plan</li>
+        <li class="flex gap-3"><i data-lucide="x" class="w-5 h-5 shrink-0 mt-0.5"></i>Billed again every year</li>
+      </ul>
+    </article>
+    <article class="y border-2 border-[#0A0A0A] p-6 sm:p-8" style="box-shadow:8px 8px 0 #0A0A0A">
+      <p class="font-semibold">diamondBlock</p>
+      <p class="disp text-5xl sm:text-6xl font-bold mt-2">$0.00<span class="text-xl font-medium"> forever</span></p>
+      <p class="mt-1 text-sm">$0.00 over five years, and every year after</p>
+      <ul class="mt-6 space-y-3">
+        <li class="flex gap-3"><i data-lucide="check" class="w-5 h-5 shrink-0 mt-0.5"></i>Every feature unlocked for everyone</li>
+        <li class="flex gap-3"><i data-lucide="check" class="w-5 h-5 shrink-0 mt-0.5"></i>No account, no analytics, no tracking</li>
+        <li class="flex gap-3"><i data-lucide="check" class="w-5 h-5 shrink-0 mt-0.5"></i>Open source under the MIT license</li>
+      </ul>
+    </article>
+  </div>
+  <p class="mt-4 text-sm">Competitor price based on a typical $99.99 per year annual plan.</p>
+</section>
+</main>
+
+<footer class="border-t-2 border-[#0A0A0A]">
+  <div class="max-w-6xl mx-auto px-4 py-10 grid gap-8 md:grid-cols-3 text-sm">
+    <div>
+      <div class="flex items-center gap-2 disp font-bold text-lg"><svg class="w-7 h-7"><use href="#gem"/></svg>diamondBlock</div>
+      <p class="mt-2">diamondblock.org</p>
+    </div>
+    <div>
+      <p><a class="underline font-medium" href="https://github.com/Plasmixx/diamondBlock">GitHub repository</a></p>
+      <p class="mt-2">Released under the MIT License. Use it, fork it, improve it.</p>
+    </div>
+    <div>
+      <p class="font-semibold">Zero-tracking pledge</p>
+      <p class="mt-2">No accounts, no analytics, no ads. Your usage data stays on your device and this site sets no tracking cookies.</p>
+    </div>
+  </div>
+</footer>
+
+<div id="tt" role="dialog" aria-modal="true" aria-label="TikTok block simulation">
+  <div class="phone">
+    <button id="ttx" aria-label="Close simulation" class="absolute top-3 right-3 z-10 w-9 h-9 flex items-center justify-center border-2 border-[#0A0A0A] bg-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+    <div id="s1" class="scr text-white">
+      <svg viewBox="0 0 100 100" class="w-24 h-24" fill="none" stroke-width="9" aria-hidden="true">
+        <defs><g id="nt"><path d="M54 16V62M54 16Q56 34 76 34"/><circle cx="41" cy="66" r="13"/></g></defs>
+        <use href="#nt" stroke="#00E5FF" transform="translate(-3,-3)"/><use href="#nt" stroke="#FF2D95" transform="translate(3,3)"/><use href="#nt" stroke="#fff"/>
+      </svg>
+      <p class="mt-4 text-sm">Opening TikTok...</p>
+    </div>
+    <div id="s2" class="scr" style="background:#FFD600;color:#0A0A0A" hidden>
+      <svg class="w-16 h-16 mb-3"><use href="#gem"/></svg>
+      <h3 class="text-2xl font-bold">TikTok is blocked</h3>
+      <p class="mt-2 mb-8 text-sm">You set this limit earlier. Lock in or wait it out.</p>
+      <button id="stay" class="btn bg-[#0A0A0A] !text-white w-full" style="box-shadow:4px 4px 0 #fff">Back to focus</button>
+      <button id="solve" type="button" class="btn bg-white w-full mt-4"><i data-lucide="puzzle" class="w-5 h-5 inline-block mr-2 align-[-4px]"></i>Solve problems</button>
+      <p id="msg" class="mt-3 text-sm font-medium min-h-[2.5rem]" aria-live="polite"></p>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<script>
+(function(){
+  var cv=document.getElementById('cv'),ctx=cv.getContext('2d'),stage=document.getElementById('stage'),
+      wrap=document.getElementById('wrap'),hl=document.getElementById('hl'),
+      reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W,H,dpr,floor,lx,ls,carS,carX,speed,parts,streaks,phase,t0,logoOn,hit,raf,fx;
+  var COLS=['#00E5FF','#FF2D95','#0A0A0A','#FFD600'];
+
+  function size(){
+    dpr=Math.min(devicePixelRatio||1,2);
+    W=stage.clientWidth;H=stage.clientHeight;
+    cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+    floor=H*0.82;ls=Math.min(H*0.5,W*0.3);lx=W*0.62;carS=Math.min(H/300,W/520)*1.15;
+  }
+
+  function track(){
+    ctx.fillStyle='#fff';ctx.fillRect(0,0,W,H);
+    ctx.fillStyle='#0A0A0A';ctx.fillRect(0,floor,W,H-floor);
+    ctx.fillStyle='#FFD600';
+    var off=(performance.now()*0.4)%60;
+    for(var x=-60+off;x<W;x+=60)ctx.fillRect(x,floor+(H-floor)/2-2,30,4);
+  }
+
+  function logoOld(){
+    var s=ls,x=lx-s/2,y=floor-s-8;
+    ctx.fillStyle='#0A0A0A';ctx.fillRect(x,y,s,s);
+    ctx.lineWidth=0;
+    function note(dx,dy,c){
+      ctx.strokeStyle=c;ctx.lineWidth=s*0.1;ctx.lineCap='butt';
+      var nx=x+s*0.5+dx,ny=y+s*0.2+dy;
+      ctx.beginPath();ctx.moveTo(nx,ny);ctx.lineTo(nx,y+s*0.62+dy);ctx.stroke();
+      ctx.beginPath();ctx.arc(nx-s*0.13,y+s*0.65+dy,s*0.13,0,Math.PI*2);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(nx,ny);ctx.quadraticCurveTo(nx+s*0.02,y+s*0.32+dy,nx+s*0.2,y+s*0.32+dy);ctx.stroke();
+    }
+    var d=s*0.035;note(-d,-d,'#00E5FF');note(d,d,'#FF2D95');note(0,0,'#fff');
+    ctx.strokeStyle='#0A0A0A';
+  }
+
+  function carOld(x){
+    var y=floor-4,s=carS;
+    ctx.save();ctx.translate(x,y);ctx.scale(s,s);
+    ctx.lineJoin='miter';ctx.lineWidth=3;ctx.strokeStyle='#0A0A0A';
+    // rear wing
+    ctx.fillStyle='#0A0A0A';ctx.fillRect(-92,-62,8,44);ctx.fillStyle='#FFD600';ctx.fillRect(-104,-66,30,10);ctx.strokeRect(-104,-66,30,10);
+    // body
+    ctx.fillStyle='#FFD600';ctx.beginPath();
+    ctx.moveTo(-86,-18);ctx.lineTo(-70,-40);ctx.lineTo(-30,-40);ctx.lineTo(-14,-56);ctx.lineTo(8,-56);ctx.lineTo(18,-38);
+    ctx.lineTo(80,-28);ctx.lineTo(98,-20);ctx.lineTo(98,-12);ctx.lineTo(-86,-12);ctx.closePath();ctx.fill();ctx.stroke();
+    // stripe + number
+    ctx.fillStyle='#0A0A0A';ctx.fillRect(-60,-30,70,6);
+    ctx.beginPath();ctx.moveTo(30,-34);ctx.lineTo(70,-28);ctx.lineTo(30,-28);ctx.fill();
+    // helmet
+    ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(-6,-58,9,0,Math.PI*2);ctx.fill();ctx.stroke();
+    // front wing
+    ctx.fillStyle='#0A0A0A';ctx.fillRect(84,-6,26,8);
+    // wheels
+    [[-56,0],[60,0]].forEach(function(w){
+      ctx.fillStyle='#0A0A0A';ctx.beginPath();ctx.arc(w[0],-14,18,0,Math.PI*2);ctx.fill();
+      ctx.fillStyle='#FFD600';ctx.beginPath();ctx.arc(w[0],-14,7,0,Math.PI*2);ctx.fill();
+    });
+    ctx.restore();
+  }
+
+  function rr(x,y,w,h,r){ctx.beginPath();if(ctx.roundRect)ctx.roundRect(x,y,w,h,r);else ctx.rect(x,y,w,h);}
+
+  function logo(){
+    var s=ls,x=lx-s/2,y=floor-s-8,
+        pr=Math.max(0,Math.min(1,1-(lx-s/2-(carX+112*carS))/(W*.4))),
+        jx=pr>.2?(Math.random()-.5)*pr*5:0,jy=pr>.2?(Math.random()-.5)*pr*3:0;
+    ctx.save();ctx.translate(jx,jy);
+    ctx.fillStyle='rgba(10,10,10,.2)';ctx.beginPath();ctx.ellipse(lx,floor+4,s*.55,5,0,0,6.283);ctx.fill();
+    rr(x+7,y+7,s,s,s*.22);ctx.fillStyle='#FFD600';ctx.fill();ctx.lineWidth=3;ctx.strokeStyle='#0A0A0A';ctx.stroke();
+    rr(x,y,s,s,s*.22);ctx.fillStyle='#0A0A0A';ctx.fill();ctx.stroke();
+    function note(dx,dy,c,blur){
+      ctx.save();ctx.strokeStyle=c;ctx.lineWidth=s*.095;ctx.lineCap='round';ctx.lineJoin='round';
+      if(blur){ctx.shadowColor=c;ctx.shadowBlur=blur;}
+      var nx=x+s*.56+dx,t=y+s*.2+dy,cr=s*.14;
+      ctx.beginPath();ctx.moveTo(nx,t);ctx.lineTo(nx,y+s*.66+dy);ctx.stroke();
+      ctx.beginPath();ctx.arc(nx-cr,y+s*.66+dy,cr,0,6.283);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(nx,t);ctx.bezierCurveTo(nx+s*.01,t+s*.1,nx+s*.1,t+s*.16,nx+s*.25,t+s*.16);ctx.stroke();
+      ctx.restore();
+    }
+    var d=s*(.03+pr*.035);
+    note(-d,-d,'#00E5FF',8);note(d,d,'#FF2D95',8);note(0,0,'#fff',0);
+    ctx.restore();
+  }
+
+  function shape(){
+    ctx.beginPath();ctx.moveTo(-84,-16);ctx.lineTo(-80,-34);ctx.lineTo(-48,-40);ctx.lineTo(-26,-50);ctx.lineTo(-8,-46);
+    ctx.lineTo(4,-36);ctx.lineTo(30,-30);ctx.lineTo(96,-21);ctx.lineTo(114,-16);ctx.lineTo(96,-12);ctx.lineTo(-84,-12);ctx.closePath();
+  }
+  function wheel(cx,cy,r,ang){
+    ctx.fillStyle='#0A0A0A';ctx.beginPath();ctx.arc(cx,cy,r,0,6.283);ctx.fill();
+    ctx.fillStyle='#FFD600';ctx.beginPath();ctx.arc(cx,cy,r*.58,0,6.283);ctx.fill();ctx.lineWidth=2;ctx.strokeStyle='#0A0A0A';ctx.stroke();
+    ctx.save();ctx.translate(cx,cy);ctx.rotate(ang);ctx.lineWidth=2.5;
+    for(var i=0;i<5;i++){ctx.rotate(1.2566);ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(r*.58,0);ctx.stroke();}
+    ctx.fillStyle='#0A0A0A';ctx.beginPath();ctx.arc(0,0,3,0,6.283);ctx.fill();ctx.restore();
+  }
+  function car(x){
+    var s=carS,k=Math.min(speed/30,1),ang=carX*.12;
+    ctx.save();ctx.translate(x,floor-3);ctx.scale(s,s);
+    ctx.lineJoin='miter';ctx.lineWidth=3;ctx.strokeStyle='#0A0A0A';
+    if(phase==='run'&&speed>12){
+      for(var g=3;g>0;g--){ctx.save();ctx.translate(-g*18*k,0);ctx.globalAlpha=.22-g*.05;shape();ctx.fillStyle='#FFD600';ctx.fill();ctx.restore();}
+      var fl=18+Math.random()*24;
+      ctx.fillStyle='#FF6A00';ctx.beginPath();ctx.moveTo(-84,-30);ctx.lineTo(-84,-20);ctx.lineTo(-84-fl,-25);ctx.closePath();ctx.fill();
+      ctx.fillStyle='#FFD600';ctx.beginPath();ctx.moveTo(-84,-27);ctx.lineTo(-84,-23);ctx.lineTo(-84-fl*.55,-25);ctx.closePath();ctx.fill();
+    }
+    // rear wing
+    ctx.beginPath();ctx.moveTo(-76,-34);ctx.lineTo(-88,-54);ctx.stroke();
+    ctx.fillStyle='#FFD600';ctx.fillRect(-106,-62,36,7);ctx.strokeRect(-106,-62,36,7);
+    ctx.fillStyle='#0A0A0A';ctx.fillRect(-106,-67,4,24);ctx.fillRect(-74,-67,4,24);
+    // body
+    shape();ctx.fillStyle='#FFD600';ctx.fill();ctx.stroke();
+    ctx.fillStyle='#0A0A0A';ctx.beginPath();ctx.moveTo(-44,-24);ctx.lineTo(12,-27);ctx.lineTo(24,-20);ctx.lineTo(-46,-17);ctx.closePath();ctx.fill();
+    ctx.beginPath();ctx.moveTo(40,-30);ctx.lineTo(45,-24);ctx.lineTo(40,-18);ctx.lineTo(35,-24);ctx.closePath();ctx.fill();
+    // driver + halo
+    ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(-4,-45,7.5,0,6.283);ctx.fill();ctx.stroke();
+    ctx.fillStyle='#0A0A0A';ctx.fillRect(-3,-47,9,4);
+    ctx.beginPath();ctx.moveTo(-17,-38);ctx.quadraticCurveTo(-3,-62,14,-34);ctx.stroke();
+    // front wing
+    ctx.fillStyle='#0A0A0A';ctx.fillRect(88,-9,28,5);
+    ctx.fillStyle='#FFD600';ctx.fillRect(110,-18,5,14);ctx.strokeRect(110,-18,5,14);
+    wheel(-60,-17,17,ang);wheel(68,-17,17,ang);
+    ctx.restore();
+  }
+
+  function drawFx(dt){
+    if(!fx)return;fx.f+=dt;var f=fx.f;
+    if(f<10){
+      ctx.save();ctx.translate(fx.x,fx.y);ctx.globalAlpha=1-f/10;ctx.fillStyle='#FFD600';ctx.strokeStyle='#0A0A0A';ctx.lineWidth=3;
+      var R=ls*(.55+f*.09),n=14;ctx.beginPath();
+      for(var i=0;i<n*2;i++){var a=i*Math.PI/n,r=i%2?R*.55:R;ctx.lineTo(Math.cos(a)*r,Math.sin(a)*r);}
+      ctx.closePath();ctx.fill();ctx.stroke();ctx.restore();
+    }
+    if(f<28){
+      ctx.save();ctx.globalAlpha=1-f/28;ctx.strokeStyle='#0A0A0A';ctx.lineWidth=4;
+      ctx.beginPath();ctx.arc(fx.x,fx.y,ls*.4+f*ls*.07,0,6.283);ctx.stroke();ctx.restore();
+    }
+  }
+
+  function shatter(){
+    var cy=floor-ls/2-8;parts=[];
+    for(var i=0;i<90;i++){
+      var a=Math.random()*Math.PI*2,sp=3+Math.random()*13;
+      parts.push({x:lx+(Math.random()-.5)*ls,y:cy+(Math.random()-.5)*ls,
+        vx:Math.cos(a)*sp+6,vy:Math.sin(a)*sp-4,r:Math.random()*6.28,vr:(Math.random()-.5)*.4,
+        s:5+Math.random()*(i<30?16:9),c:COLS[i%4],k:Math.floor(Math.random()*4),life:1});
+    }
+  }
+
+  function drawPart(p){
+    ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.r);ctx.globalAlpha=Math.max(p.life,0);
+    ctx.fillStyle=p.c;ctx.strokeStyle='#0A0A0A';ctx.lineWidth=1.5;ctx.beginPath();
+    var s=p.s;
+    if(p.k===0){ctx.moveTo(0,-s);ctx.lineTo(s*.7,0);ctx.lineTo(0,s);ctx.lineTo(-s*.7,0);}
+    else if(p.k===1){ctx.moveTo(-s,s*.6);ctx.lineTo(s*.2,-s);ctx.lineTo(s,s*.4);}
+    else if(p.k===2){ctx.moveTo(-s*.8,-s*.5);ctx.lineTo(s*.6,-s*.7);ctx.lineTo(s*.2,s*.8);}
+    else{ctx.rect(-s*.55,-s*.55,s*1.1,s*1.1);}
+    ctx.closePath();ctx.fill();if(p.c!=='#0A0A0A')ctx.stroke();ctx.restore();
+  }
+
+  function impact(){
+    hit=true;logoOn=false;shatter();fx={x:lx,y:floor-ls/2-8,f:0};
+    wrap.classList.remove('shake');void wrap.offsetWidth;wrap.classList.add('shake');
+    hl.classList.add('on');
+    if(window.gsap)gsap.from('#hl > *',{y:26,opacity:0,duration:.6,stagger:.14,ease:'power3.out',clearProps:'all'});
+    if(ac&&ac.state==='running')sfx('crash');
+  }
+
+  var last=0;
+  function frame(now){
+    var dt=Math.min((now-last)/16.67,2.5);last=now;
+    track();
+    // speed streaks
+    for(var i=0;i<streaks.length;i++){
+      var s=streaks[i];s.x-=s.v*dt*(phase==='run'?1:.35);
+      if(s.x+s.l<0){s.x=W+Math.random()*80;s.y=floor-10-Math.random()*(floor*.85);}
+      ctx.fillStyle='rgba(10,10,10,'+(phase==='run'?.35:.12)+')';ctx.fillRect(s.x,s.y,s.l,2);
+    }
+    if(logoOn)logo();
+    drawFx(dt);
+    if(phase==='run'){
+      carX+=speed*dt;speed=Math.min(speed+.5*dt,30);
+      if(!hit&&carX+114*carS>=lx-ls/2)impact();
+      if(carX-110*carS>W){phase='done';}
+    }
+    car(carX);
+    var alive=false;
+    for(var j=0;j<parts.length;j++){
+      var p=parts[j];
+      p.vy+=.55*dt;p.x+=p.vx*dt;p.y+=p.vy*dt;p.r+=p.vr*dt;p.vx*=.992;
+      if(p.y>floor-p.s*.4){p.y=floor-p.s*.4;p.vy*=-.45;p.vx*=.8;p.vr*=.8;}
+      if(p.x>W+20)p.vx=-Math.abs(p.vx)*.5;
+      p.life-=.0035*dt;
+      if(p.life>0){alive=true;drawPart(p);}
+    }
+    if(phase==='done'&&!alive){return;}
+    raf=requestAnimationFrame(frame);
+  }
+
+  function start(){
+    cancelAnimationFrame(raf);size();
+    parts=[];fx=null;hit=false;logoOn=true;phase='run';speed=10;carX=-130*carS;
+    streaks=[];for(var i=0;i<22;i++)streaks.push({x:Math.random()*W,y:floor-10-Math.random()*floor*.85,l:30+Math.random()*90,v:12+Math.random()*16});
+    hl.classList.remove('on');
+    if(reduce){
+      logoOn=false;shatter();hit=true;phase='done';
+      track();parts.forEach(function(p){p.x=lx+(Math.random()-.5)*W*.7;p.y=floor-p.s*.4;p.life=1;drawPart(p)});
+      car(W*.85);hl.classList.add('on');return;
+    }
+    last=performance.now();raf=requestAnimationFrame(frame);
+  }
+
+  if(window.lucide)lucide.createIcons();
+  var mq=document.querySelector('.mq');
+  if(mq){var mc=mq.cloneNode(true);mc.setAttribute('aria-hidden','true');mq.parentNode.appendChild(mc);}
+  if(window.gsap&&window.ScrollTrigger&&!reduce){
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.from('#features article',{y:40,opacity:0,duration:.6,stagger:.15,ease:'power3.out',scrollTrigger:{trigger:'#features',start:'top 80%'}});
+    gsap.from('#donate > div',{scale:.96,opacity:0,duration:.6,ease:'power3.out',scrollTrigger:{trigger:'#donate',start:'top 85%'}});
+  }
+  var lenis=null;
+  if(!reduce&&window.Lenis){
+    lenis=new Lenis({anchors:true});
+    if(window.gsap&&window.ScrollTrigger){lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(function(t){lenis.raf(t*1000)});gsap.ticker.lagSmoothing(0);}
+    else{(function r(t){lenis.raf(t);requestAnimationFrame(r)})(0);}
+  }
+  var c5=document.getElementById('cost5');
+  if(c5&&window.gsap&&window.ScrollTrigger&&!reduce){
+    var co={v:0};c5.textContent='0.00';
+    ScrollTrigger.create({trigger:'#compare',start:'top 75%',once:true,onEnter:function(){gsap.to(co,{v:499.95,duration:1.6,ease:'power2.out',onUpdate:function(){c5.textContent=co.v.toFixed(2)}})}});
+  }
+  /* Web Audio API: short sound effects, only after a user click */
+  var ac=null;
+  function audio(){
+    if(!ac){var C=window.AudioContext||window.webkitAudioContext;if(C)ac=new C();}
+    if(ac&&ac.state==='suspended')ac.resume();
+    return ac;
+  }
+  function tone(f,t,d,type,v){
+    var o=ac.createOscillator(),g=ac.createGain(),n=ac.currentTime+t;
+    o.type=type;o.frequency.setValueAtTime(f,n);g.gain.setValueAtTime(v,n);g.gain.exponentialRampToValueAtTime(.001,n+d);
+    o.connect(g);g.connect(ac.destination);o.start(n);o.stop(n+d+.05);
+  }
+  function sfx(k){
+    if(!audio())return;
+    if(k==='crash'){
+      var n=ac.sampleRate*.45,b=ac.createBuffer(1,n,ac.sampleRate),d=b.getChannelData(0);
+      for(var i=0;i<n;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/n,3);
+      var s=ac.createBufferSource(),g=ac.createGain();g.gain.value=.25;s.buffer=b;s.connect(g);g.connect(ac.destination);s.start();
+      tone(70,0,.4,'sine',.3);
+    }else if(k==='open'){tone(440,0,.12,'square',.04);tone(660,.1,.14,'square',.04);}
+    else if(k==='block'){tone(196,0,.25,'sawtooth',.06);tone(392,.12,.45,'triangle',.08);}
+  }
+  /* TikTok block simulation */
+  var tt=document.getElementById('tt'),s1=document.getElementById('s1'),s2=document.getElementById('s2'),
+      msg=document.getElementById('msg'),tmr,iv;
+  function showBlock(){
+    s1.hidden=true;s2.hidden=false;sfx('block');
+  }
+  function openTT(){
+    tt.classList.add('open');s1.hidden=false;s2.hidden=true;msg.textContent='';
+    if(lenis)lenis.stop();else document.body.style.overflow='hidden';
+    sfx('open');clearTimeout(tmr);tmr=setTimeout(showBlock,1200);
+    document.getElementById('ttx').focus();
+  }
+  function closeTT(){
+    clearTimeout(tmr);clearInterval(iv);tt.classList.remove('open');
+    if(lenis)lenis.start();else document.body.style.overflow='';
+  }
+  document.getElementById('simtt').addEventListener('click',openTT);
+  document.getElementById('ttx').addEventListener('click',closeTT);
+  tt.addEventListener('click',function(e){if(e.target===tt)closeTT();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&tt.classList.contains('open'))closeTT();});
+  document.getElementById('stay').addEventListener('click',function(){
+    msg.textContent='Nice. One less scroll session.';
+    if(window.confetti&&!reduce)confetti({particleCount:70,spread:70,origin:{y:.7},colors:['#FFD600','#0A0A0A','#00E5FF','#FF2D95'],shapes:['square'],zIndex:100});
+    setTimeout(closeTT,1300);
+  });
+  /* GitHub REST API: live repo stats and latest release */
+  var gh=document.getElementById('gh'),dl=document.getElementById('download');
+  if(gh&&window.fetch){
+    var base='https://api.github.com/repos/Plasmixx/diamondBlock';
+    fetch(base).then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(d){
+      gh.textContent=d.stargazers_count+' stars, '+d.forks_count+' forks, last updated '+new Date(d.pushed_at).toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'});
+      gh.classList.remove('hidden');
+      return fetch(base+'/releases/latest');
+    }).then(function(r){if(!r||!r.ok)throw 0;return r.json();}).then(function(rel){
+      if(rel&&rel.html_url&&dl)dl.href=rel.html_url;
+    }).catch(function(){});
+  }
+  var sp=document.getElementById('support');
+  if(sp)sp.addEventListener('click',function(e){
+    if(sp.getAttribute('href')==='#')e.preventDefault();
+    if(window.confetti&&!reduce){
+      var r=sp.getBoundingClientRect();
+      confetti({particleCount:90,spread:75,origin:{x:(r.left+r.width/2)/innerWidth,y:(r.top+r.height/2)/innerHeight},colors:['#FFD600','#0A0A0A','#00E5FF','#FF2D95'],shapes:['square'],scalar:1.1,ticks:200});
+    }
+  });
+  document.getElementById('replay').addEventListener('click',function(){audio();start();});
+  var rt;addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){if(phase==='done'||reduce)start();else size();},200)});
+  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(start)}else{start()}
+})();
+</script>
+</body>
+</html>
