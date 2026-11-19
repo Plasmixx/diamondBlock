@@ -229,12 +229,14 @@ html.lenis,html.lenis body{height:auto}
   <p class="mt-2 text-sm">Your account saves your math level, so the problems match you.</p>
   <label class="mt-4 text-sm font-semibold" for="math-level">Math level</label>
   <select id="math-level" class="mt-1 w-full border-2 border-[#0A0A0A] p-2 font-semibold bg-white">
-    <option value="easy">Easy</option>
-    <option value="medium">Medium</option>
-    <option value="hard">Hard</option>
-  </select>
+  <option value="easy">Easy — multiply 2-digit numbers</option>
+  <option value="medium">Medium — expand binomials</option>
+  <option value="hard">Hard — derivatives</option>
+  <option value="veryhard">Very Hard — integrals</option>
+</select>
   <p id="problem" class="mt-4 text-3xl font-bold">?</p>
-  <input id="answer" type="number" inputmode="numeric" placeholder="Your answer" class="mt-3 w-full border-2 border-[#0A0A0A] p-3 text-center text-lg font-semibold">
+  <input id="answer" type="text" inputmode="text" placeholder="Your answer" autocomplete="off" class="mt-3 w-full border-2 border-[#0A0A0A] p-3 text-center text-lg font-semibold">
+<p class="mt-2 text-xs">You can type it normally, in LaTeX, or in words — e.g. 16x^15, $16x^{15}$, or "16 times x to the 15th" all count.</p>>
   <button id="check-answer" type="button" class="btn bg-[#0A0A0A] !text-white w-full mt-4" style="box-shadow:4px 4px 0 #fff">Check answer</button>
   <button id="back-block" type="button" class="btn bg-white w-full mt-4">Back</button>
   <p id="solve-msg" class="mt-3 text-sm font-medium min-h-[2.5rem]" aria-live="polite"></p>
@@ -527,18 +529,47 @@ html.lenis,html.lenis body{height:auto}
     if(window.confetti&&!reduce)confetti({particleCount:70,spread:70,origin:{y:.7},colors:['#FFD600','#0A0A0A','#00E5FF','#FF2D95'],shapes:['square'],zIndex:100});
     setTimeout(closeTT,1300);
   });
-/* Solve problems: math unlock, level picker stands in for your account's saved math level */
-var s3=document.getElementById('s3'),prob=document.getElementById('problem'),ans=document.getElementById('answer'),smsg=document.getElementById('solve-msg'),curAns=0;
+/* Solve problems: Easy = 2-digit multiplication, Medium = binomials, Hard = derivative, Very Hard = integral */
+var s3=document.getElementById('s3'),prob=document.getElementById('problem'),ans=document.getElementById('answer'),smsg=document.getElementById('solve-msg'),curAns=[];
+function norm(s){
+  s=(' '+String(s).toLowerCase()+' ');
+  s=s.replace(/\\frac/g,'').replace(/[{}()]/g,'').replace(/\$/g,'');
+  s=s.replace(/\bto the power of\b/g,'^');
+  var W={zero:0,one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,ten:10,eleven:11,twelve:12,thirteen:13,fourteen:14,fifteen:15,sixteen:16,seventeen:17,eighteen:18,nineteen:19,twenty:20,first:1,second:2,third:3,fourth:4,fifth:5,sixth:6,seventh:7,eighth:8,ninth:9,tenth:10,eleventh:11,twelfth:12,thirteenth:13,fourteenth:14,fifteenth:15,sixteenth:16,seventeenth:17,eighteenth:18,nineteenth:19,twentieth:20};
+  s=s.replace(/\b(zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|eleventh|twelfth|thirteenth|fourteenth|fifteenth|sixteenth|seventeenth|eighteenth|nineteenth|twentieth)\b/g,function(m){return W[m];});
+  s=s.replace(/\bto the (\d+)(st|nd|rd|th)?\b/g,'^$1');
+  s=s.replace(/\bsquared\b/g,'^2').replace(/\bcubed\b/g,'^3');
+  s=s.replace(/\btimes\b/g,'*').replace(/\bmultiplied by\b/g,'*').replace(/\bplus\b/g,'+').replace(/\bminus\b/g,'-').replace(/\bover\b/g,'/');
+  s=s.replace(/\*\*/g,'^').replace(/\s+/g,'').replace(/\*/g,'');
+  s=s.replace(/\+c$/,'');
+  return s;
+}
 function newProblem(){
-  var lvl=document.getElementById('math-level').value,a,b,op;
-  if(lvl==='hard'){a=6+Math.floor(Math.random()*7);b=3+Math.floor(Math.random()*9);op='×';curAns=a*b;}
-  else if(lvl==='medium'){a=12+Math.floor(Math.random()*80);b=12+Math.floor(Math.random()*80);op=Math.random()<.5?'+':'-';if(op==='-'&&b>a){var t=a;a=b;b=t;}curAns=op==='+'?a+b:a-b;}
-  else{a=2+Math.floor(Math.random()*8);b=2+Math.floor(Math.random()*8);op=Math.random()<.5?'+':'-';if(op==='-'&&b>a){var t2=a;a=b;b=t2;}curAns=op==='+'?a+b:a-b;}
-  prob.textContent=a+' '+op+' '+b+' = ?';ans.value='';smsg.textContent='';ans.focus();
+  var lvl=document.getElementById('math-level').value,a,b,n;
+  if(lvl==='easy'){
+    a=10+Math.floor(Math.random()*90);b=10+Math.floor(Math.random()*90);
+    prob.textContent=a+' × '+b+' = ?';curAns=[String(a*b)];
+  }else if(lvl==='medium'){
+    a=2+Math.floor(Math.random()*8);b=2+Math.floor(Math.random()*8);
+    prob.textContent='(x + '+a+')(x + '+b+') = ?';curAns=['x^2+'+(a+b)+'x+'+(a*b)];
+  }else if(lvl==='hard'){
+    n=3+Math.floor(Math.random()*14);
+    prob.textContent='d/dx x^'+n+' = ?';curAns=[n+'x^'+(n-1),'x^'+(n-1)+n];
+  }else{
+    n=2+Math.floor(Math.random()*8);
+    prob.textContent='∫ x^'+n+' dx = ?';curAns=['x^'+(n+1)+'/'+(n+1),'1/'+(n+1)+'x^'+(n+1)];
+  }
+  ans.value='';smsg.textContent='';ans.focus();
 }
 document.getElementById('solve').addEventListener('click',function(){s2.hidden=true;s3.hidden=false;newProblem();});
 document.getElementById('math-level').addEventListener('change',newProblem);
 document.getElementById('check-answer').addEventListener('click',function(){
+  var ok=curAns.some(function(e){return norm(ans.value)===norm(e);});
+  if(ok){smsg.textContent='Correct — unlocked. Nice work.';if(window.confetti&&!reduce)confetti({particleCount:70,spread:70,origin:{y:.7},colors:['#FFD600','#0A0A0A','#00E5FF','#FF2D95'],shapes:['square'],zIndex:100});setTimeout(closeTT,1300);}
+  else{smsg.textContent='Not quite — try again.';ans.focus();}
+});
+ans.addEventListener('keydown',function(e){if(e.key==='Enter')document.getElementById('check-answer').click();});
+document.getElementById('back-block').addEventListener('click',function(){s3.hidden=true;s2.hidden=false;});
   if(parseInt(ans.value,10)===curAns){smsg.textContent='Correct — unlocked. Nice work.';if(window.confetti&&!reduce)confetti({particleCount:70,spread:70,origin:{y:.7},colors:['#FFD600','#0A0A0A','#00E5FF','#FF2D95'],shapes:['square'],zIndex:100});setTimeout(closeTT,1300);}
   else{smsg.textContent='Not quite — try again.';ans.focus();}
 });
