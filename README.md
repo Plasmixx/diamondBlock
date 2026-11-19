@@ -4,4 +4,5 @@ I'm making an app where you can block apps on your phone to increase productivit
 I'm working on learning Swift so I can get this on iOS to try it, and our code will always be open source, and this project is strictly not for profit. The only way for the developers to make money off of this project is strictly through optional donations through the app that do not grant any sort of reward, ever. Emergency exit keys will also never be for sale. We only use buymeacoffee and Patreon as our donation channels, it is not us if it is a website other than those two.
 
 Users can choose to donate if they appreciate what we do. 
+
 Note for potential donors: please remember that you do not receive any in-app/physical reward for donating, it just means the world to us.
