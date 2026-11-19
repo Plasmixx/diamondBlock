@@ -4,7 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>diamondBlock — free, open-source app blocker</title>
-<meta name="description" content="diamondBlock is a 100% free, open-source app blocker. No paywalls, no tracking.">
+<meta name="description" content="diamondBlock is a 100% free, open-source app blocker. No paywalls.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpolygon points='11,5 29,5 38,15 20,36 2,15' fill='%23FFD600' stroke='%230A0A0A' stroke-width='2.5'/%3E%3C/svg%3E">
+<meta property="og:title" content="diamondBlock — free, open-source app blocker">
+<meta property="og:description" content="Block the apps that eat your time. Solve problems, wait it out, or tap phones with a friend. Forever free.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://diamond-block.vercel.app/">
 <meta name="color-scheme" content="light">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,8 +26,8 @@ h1,h2,h3,.disp{font-family:'Space Grotesk',system-ui,sans-serif}
 .btn:active{transform:translate(4px,4px);box-shadow:0 0 0 #0A0A0A}
 .btn:focus-visible,a:focus-visible{outline:3px solid #0A0A0A;outline-offset:3px}
 .y{background:#FFD600}
-#stage{position:relative;height:300px;overflow:hidden;background:#fff}
-@media(max-width:640px){#stage{height:230px}}
+#stage{position:relative;height:180px;overflow:hidden;background:#fff}
+@media(max-width:640px){#stage{height:160px}}
 #cv{position:absolute;inset:0;width:100%;height:100%;display:block}
 #hl{opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s}
 #hl.on{opacity:1;transform:none}
@@ -71,7 +76,7 @@ html.lenis,html.lenis body{height:auto}
       <a href="#donate" class="hover:underline">Donate</a>
       <a href="https://github.com/Plasmixx/diamondBlock" class="hover:underline">GitHub</a>
     </div>
-    <a href="#download" class="btn y !py-2 !px-4 text-sm sm:text-base">Download Free</a>
+    <a href="#waitlist" class="btn y !py-2 !px-4 text-sm sm:text-base">Join waitlist</a>
   </nav>
 </header>
 
@@ -86,9 +91,9 @@ html.lenis,html.lenis body{height:auto}
 
   <div id="hl" class="mt-4 max-w-3xl">
     <h1 class="text-4xl sm:text-6xl font-bold leading-[1.02] tracking-tight">Break the scroll cycle. Forever free.</h1>
-    <p class="mt-5 text-lg sm:text-xl max-w-2xl">diamondBlock is a 100% free, open-source app blocker. Zero paywalls, no accounts, no tracking. Just you, taking your time back from the feed.</p>
+    <p class="mt-5 text-lg sm:text-xl max-w-2xl">diamondBlock is a 100% free, open-source app blocker. Zero paywalls. Your account just saves your settings, like your math level, so the problems match you.</p>
     <div class="mt-7 flex flex-col sm:flex-row gap-4">
-      <a id="download" href="https://github.com/Plasmixx/diamondBlock/releases" class="btn y shimmer"><i data-lucide="download" class="w-5 h-5 inline-block mr-2 align-[-4px]"></i>Download diamondBlock</a>
+      <a id="download" href="#waitlist" class="btn y shimmer"><i data-lucide="download" class="w-5 h-5 inline-block mr-2 align-[-4px]"></i>Get notified when it launches</a>
       <a href="https://github.com/Plasmixx/diamondBlock" class="btn bg-white"><i data-lucide="git-branch" class="w-5 h-5 inline-block mr-2 align-[-4px]"></i>View Source on GitHub</a>
     </div>
     <p id="gh" class="mt-5 hidden font-medium text-sm"></p>
@@ -117,23 +122,30 @@ html.lenis,html.lenis body{height:auto}
     <article id="open-source" class="box p-6">
       <div class="flex items-center justify-between mb-4"><svg class="w-10 h-10"><use href="#gem"/></svg><i data-lucide="shield-check" class="w-7 h-7"></i></div>
       <h3 class="text-xl font-bold mb-2">100% open source and local-first</h3>
-      <p>Audit every line of code on GitHub. Your screen-time data never leaves your device: no accounts, no analytics, no tracking.</p>
+      <p>Audit every line of code on GitHub. Your account only stores your settings, like your math level. No ads, and we never sell your data.</p>
     </article>
     <article class="box p-6">
       <div class="flex items-center justify-between mb-4"><svg class="w-10 h-10"><use href="#gem"/></svg><i data-lucide="timer" class="w-7 h-7"></i></div>
-      <h3 class="text-xl font-bold mb-2">Unbreakable focus modes</h3>
+      <h3 class="text-xl font-bold mb-2">Strict focus modes</h3>
       <p>Strict app locks, custom schedules, and intentional friction delays stop autopilot TikTok and Reels scrolling cold.</p>
     </article>
   </div>
 </section>
-
+<section id="how" class="max-w-6xl mx-auto px-4 pb-16">
+  <h2 class="text-3xl sm:text-4xl font-bold mb-8">How it works</h2>
+  <div class="grid gap-6 md:grid-cols-4">
+    <article class="box p-6"><h3 class="text-xl font-bold mb-2">1. Block it</h3><p>Pick the apps to block, or block everything except a few you allow.</p></article>
+    <article class="box p-6"><h3 class="text-xl font-bold mb-2">2. Get stopped</h3><p>Open a blocked app and diamondBlock steps in instead of the feed.</p></article>
+    <article class="box p-6"><h3 class="text-xl font-bold mb-2">3. Earn your way back</h3><p>Solve problems at your level, wait out the timer, or tap phones with a friend.</p></article>
+    <article class="box p-6"><h3 class="text-xl font-bold mb-2">4. Emergency keys</h3><p>You start with 3 emergency exit keys, just in case something happens. They're never for sale.</p></article>
+  </div>
+</section>
 <section id="donate" class="max-w-6xl mx-auto px-4 pb-20">
   <div class="y border-2 border-[#0A0A0A] p-7 sm:p-12" style="box-shadow:8px 8px 0 #0A0A0A">
     <h2 class="text-3xl sm:text-5xl font-bold max-w-2xl leading-tight">No tiers. No perks. Just support.</h2>
     <p class="mt-5 text-lg max-w-2xl">diamondBlock is completely free and open source. Donating doesn't unlock secret features or special badges—you already have the full app. If diamondBlock saved your time, feel free to chip in to show support and help keep the project alive.</p>
     <div class="mt-7 flex flex-col sm:flex-row sm:items-center gap-5">
-      <!-- TODO: replace # with your Buy Me a Coffee or Patreon link -->
-      <a id="support" href="#" class="btn bg-[#0A0A0A] !text-white" style="box-shadow:4px 4px 0 #fff"><i data-lucide="heart" class="w-5 h-5 inline-block mr-2 align-[-4px]"></i>Support diamondBlock</a>
+      <a id="support" href="https://buymeacoffee.com/REPLACE-ME" class="btn bg-[#0A0A0A] !text-white" style="box-shadow:4px 4px 0 #fff">
       <p class="font-medium max-w-sm">Donations offer no perks or advantages to anyone who gives, but they mean the world to us.</p>
     </div>
   </div>
@@ -157,12 +169,23 @@ html.lenis,html.lenis body{height:auto}
       <p class="mt-1 text-sm">$0.00 over five years, and every year after</p>
       <ul class="mt-6 space-y-3">
         <li class="flex gap-3"><i data-lucide="check" class="w-5 h-5 shrink-0 mt-0.5"></i>Every feature unlocked for everyone</li>
-        <li class="flex gap-3"><i data-lucide="check" class="w-5 h-5 shrink-0 mt-0.5"></i>No account, no analytics, no tracking</li>
+        <li class="flex gap-3"><i data-lucide="check" class="w-5 h-5 shrink-0 mt-0.5"></i>Your account only saves your settings, like your math level</li>
         <li class="flex gap-3"><i data-lucide="check" class="w-5 h-5 shrink-0 mt-0.5"></i>Open source under the MIT license</li>
       </ul>
     </article>
   </div>
   <p class="mt-4 text-sm">Competitor price based on a typical $99.99 per year annual plan.</p>
+</section>
+  <section id="waitlist" class="max-w-6xl mx-auto px-4 pb-20">
+  <div class="box p-7 sm:p-12">
+    <h2 class="text-3xl sm:text-4xl font-bold">Coming soon — join the waitlist</h2>
+    <p class="mt-4 text-lg max-w-2xl">There's no download yet. Leave your email and we'll tell you when the first version is ready for iOS and Android.</p>
+    <form id="waitlist-form" class="mt-6 flex flex-col sm:flex-row gap-4 max-w-xl">
+      <input id="waitlist-email" type="email" required placeholder="you@example.com" class="flex-1 border-2 border-[#0A0A0A] p-3 font-medium">
+      <button type="submit" class="btn y">Notify me</button>
+    </form>
+    <p id="waitlist-msg" class="mt-3 text-sm font-medium" aria-live="polite"></p>
+  </div>
 </section>
 </main>
 
@@ -177,8 +200,8 @@ html.lenis,html.lenis body{height:auto}
       <p class="mt-2">Released under the MIT License. Use it, fork it, improve it.</p>
     </div>
     <div>
-      <p class="font-semibold">Zero-tracking pledge</p>
-      <p class="mt-2">No accounts, no analytics, no ads. Your usage data stays on your device and this site sets no tracking cookies.</p>
+      <p class="font-semibold">Privacy pledge</p>
+      <p class="mt-2">No ads, no selling your data. Your account only stores your settings, like your math level, and this site sets no tracking cookies.</p>
     </div>
   </div>
 </footer>
@@ -202,6 +225,22 @@ html.lenis,html.lenis body{height:auto}
       <p id="msg" class="mt-3 text-sm font-medium min-h-[2.5rem]" aria-live="polite"></p>
     </div>
   </div>
+  <div id="s3" class="scr" style="background:#fff;color:#0A0A0A" hidden>
+  <svg class="w-16 h-16 mb-3"><use href="#gem"/></svg>
+  <h3 class="text-2xl font-bold">Solve to unlock</h3>
+  <p class="mt-2 text-sm">Your account saves your math level, so the problems match you.</p>
+  <label class="mt-4 text-sm font-semibold" for="math-level">Math level</label>
+  <select id="math-level" class="mt-1 w-full border-2 border-[#0A0A0A] p-2 font-semibold bg-white">
+    <option value="easy">Easy</option>
+    <option value="medium">Medium</option>
+    <option value="hard">Hard</option>
+  </select>
+  <p id="problem" class="mt-4 text-3xl font-bold">?</p>
+  <input id="answer" type="number" inputmode="numeric" placeholder="Your answer" class="mt-3 w-full border-2 border-[#0A0A0A] p-3 text-center text-lg font-semibold">
+  <button id="check-answer" type="button" class="btn bg-[#0A0A0A] !text-white w-full mt-4" style="box-shadow:4px 4px 0 #fff">Check answer</button>
+  <button id="back-block" type="button" class="btn bg-white w-full mt-4">Back</button>
+  <p id="solve-msg" class="mt-3 text-sm font-medium min-h-[2.5rem]" aria-live="polite"></p>
+</div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.min.js"></script>
@@ -471,7 +510,7 @@ html.lenis,html.lenis body{height:auto}
     s1.hidden=true;s2.hidden=false;sfx('block');
   }
   function openTT(){
-    tt.classList.add('open');s1.hidden=false;s2.hidden=true;msg.textContent='';
+    tt.classList.add('open');s1.hidden=false;s2.hidden=true;s3.hidden=true;msg.textContent='';
     if(lenis)lenis.stop();else document.body.style.overflow='hidden';
     sfx('open');clearTimeout(tmr);tmr=setTimeout(showBlock,1200);
     document.getElementById('ttx').focus();
@@ -489,6 +528,26 @@ html.lenis,html.lenis body{height:auto}
     if(window.confetti&&!reduce)confetti({particleCount:70,spread:70,origin:{y:.7},colors:['#FFD600','#0A0A0A','#00E5FF','#FF2D95'],shapes:['square'],zIndex:100});
     setTimeout(closeTT,1300);
   });
+/* Solve problems: math unlock, level picker stands in for your account's saved math level */
+var s3=document.getElementById('s3'),prob=document.getElementById('problem'),ans=document.getElementById('answer'),smsg=document.getElementById('solve-msg'),curAns=0;
+function newProblem(){
+  var lvl=document.getElementById('math-level').value,a,b,op;
+  if(lvl==='hard'){a=6+Math.floor(Math.random()*7);b=3+Math.floor(Math.random()*9);op='×';curAns=a*b;}
+  else if(lvl==='medium'){a=12+Math.floor(Math.random()*80);b=12+Math.floor(Math.random()*80);op=Math.random()<.5?'+':'-';if(op==='-'&&b>a){var t=a;a=b;b=t;}curAns=op==='+'?a+b:a-b;}
+  else{a=2+Math.floor(Math.random()*8);b=2+Math.floor(Math.random()*8);op=Math.random()<.5?'+':'-';if(op==='-'&&b>a){var t2=a;a=b;b=t2;}curAns=op==='+'?a+b:a-b;}
+  prob.textContent=a+' '+op+' '+b+' = ?';ans.value='';smsg.textContent='';ans.focus();
+}
+document.getElementById('solve').addEventListener('click',function(){s2.hidden=true;s3.hidden=false;newProblem();});
+document.getElementById('math-level').addEventListener('change',newProblem);
+document.getElementById('check-answer').addEventListener('click',function(){
+  if(parseInt(ans.value,10)===curAns){smsg.textContent='Correct — unlocked. Nice work.';if(window.confetti&&!reduce)confetti({particleCount:70,spread:70,origin:{y:.7},colors:['#FFD600','#0A0A0A','#00E5FF','#FF2D95'],shapes:['square'],zIndex:100});setTimeout(closeTT,1300);}
+  else{smsg.textContent='Not quite — try again.';ans.focus();}
+});
+ans.addEventListener('keydown',function(e){if(e.key==='Enter')document.getElementById('check-answer').click();});
+document.getElementById('back-block').addEventListener('click',function(){s3.hidden=true;s2.hidden=false;});
+/* Waitlist: no backend yet, so it opens the visitor's mail app */
+var wf=document.getElementById('waitlist-form');
+if(wf)wf.addEventListener('submit',function(e){e.preventDefault();var em=document.getElementById('waitlist-email').value.trim();if(!em)return;window.location.href='mailto:hello@mocosignup.com?subject=diamondBlock%20waitlist&body=Please%20add%20'+encodeURIComponent(em)+'%20to%20the%20diamondBlock%20waitlist.';document.getElementById('waitlist-msg').textContent='Thanks — your mail app should open. Hit send to join the waitlist.';});
   /* GitHub REST API: live repo stats and latest release */
   var gh=document.getElementById('gh'),dl=document.getElementById('download');
   if(gh&&window.fetch){
@@ -496,10 +555,7 @@ html.lenis,html.lenis body{height:auto}
     fetch(base).then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(d){
       gh.textContent=d.stargazers_count+' stars, '+d.forks_count+' forks, last updated '+new Date(d.pushed_at).toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'});
       gh.classList.remove('hidden');
-      return fetch(base+'/releases/latest');
-    }).then(function(r){if(!r||!r.ok)throw 0;return r.json();}).then(function(rel){
-      if(rel&&rel.html_url&&dl)dl.href=rel.html_url;
-    }).catch(function(){});
+     }).catch(function(){});
   }
   var sp=document.getElementById('support');
   if(sp)sp.addEventListener('click',function(e){
