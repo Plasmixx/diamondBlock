@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>diamondBlock — free, open-source app blocker</title>
+<meta name="description" content="diamondBlock is a 100% free, open-source app blocker. No paywalls, no tracking.">
+<meta name="color-scheme" content="light">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<style>
+:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-behavior:smooth;scroll-padding-top:5rem}
+body{background:#fff;color:#0A0A0A;font-family:Inter,system-ui,sans-serif}
+h1,h2,h3,.disp{font-family:'Space Grotesk',system-ui,sans-serif}
+.box{border:2px solid #0A0A0A;box-shadow:6px 6px 0 #0A0A0A;background:#fff}
+.btn{display:inline-block;border:2px solid #0A0A0A;box-shadow:4px 4px 0 #0A0A0A;font-weight:600;padding:.75rem 1.25rem;transition:transform .1s,box-shadow .1s;text-align:center}
+.btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 #0A0A0A}
+.btn:active{transform:translate(4px,4px);box-shadow:0 0 0 #0A0A0A}
+.btn:focus-visible,a:focus-visible{outline:3px solid #0A0A0A;outline-offset:3px}
+.y{background:#FFD600}
+#stage{position:relative;height:300px;overflow:hidden;background:#fff}
+@media(max-width:640px){#stage{height:230px}}
+#cv{position:absolute;inset:0;width:100%;height:100%;display:block}
+#hl{opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s}
+#hl.on{opacity:1;transform:none}
+@keyframes shake{0%,100%{transform:translate(0)}20%{transform:translate(-7px,4px)}40%{transform:translate(6px,-5px)}60%{transform:translate(-4px,-3px)}80%{transform:translate(3px,3px)}}
+.shake{animation:shake .32s linear}
+.shimmer{position:relative;overflow:hidden}
+.shimmer::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.8) 50%,transparent 65%);transform:translateX(-100%);animation:sh 2.6s ease-in-out infinite}
+@keyframes sh{to{transform:translateX(100%)}}
+.marquee{display:flex;overflow:hidden;border-block:2px solid #0A0A0A;background:#FFD600}
+.mq{display:flex;gap:1rem;padding:.9rem 1rem .9rem 0;flex-shrink:0;min-width:100%;justify-content:space-around;animation:mq 30s linear infinite}
+@keyframes mq{to{transform:translateX(-100%)}}
+.chip{display:flex;align-items:center;gap:.5rem;background:#fff;border:2px solid #0A0A0A;box-shadow:3px 3px 0 #0A0A0A;padding:.35rem .9rem;font-weight:600;white-space:nowrap}
+@media(prefers-reduced-motion:reduce){.shake{animation:none}#hl{transition:none}.shimmer::after,.mq{animation:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="gem" viewBox="0 0 40 40">
+    <polygon points="11,5 29,5 38,15 20,36 2,15" fill="#FFD600" stroke="#0A0A0A" stroke-width="2.5" stroke-linejoin="miter"/>
+    <path d="M2 15H38M11 5L15 15L20 36L25 15L29 5M15 15L20 5L25 15" fill="none" stroke="#0A0A0A" stroke-width="2" stroke-linejoin="miter"/>
+  </symbol>
+</svg>
+
+<header class="sticky top-0 z-30 bg-white border-b-2 border-[#0A0A0A]" style="top:env(safe-area-inset-top,0px)">
+  <nav class="max-w-6xl mx-auto flex items-center justify-between gap-3 px-4 py-3">
+    <a href="#top" class="flex items-center gap-2 disp font-bold text-xl" aria-label="diamondBlock home">
+      <svg class="w-8 h-8"><use href="#gem"/></svg>diamondBlock
+    </a>
+    <div class="hidden md:flex items-center gap-7 font-medium">
+      <a href="#features" class="hover:underline">Features</a>
+      <a href="#open-source" class="hover:underline">Open Source</a>
+      <a href="#donate" class="hover:underline">Donate</a>
+      <a href="https://github.com/Plasmixx/diamondBlock" class="hover:underline">GitHub</a>
+    </div>
+    <a href="#download" class="btn y !py-2 !px-4 text-sm sm:text-base">Download Free</a>
+  </nav>
+</header>
+
+<main id="top">
+<section class="max-w-6xl mx-auto px-4 pt-8 sm:pt-12 pb-14">
+  <div id="wrap" class="box">
+    <div id="stage"><canvas id="cv" role="img" aria-label="A yellow and black F1 car smashes through a TikTok logo, scattering colorful shards"></canvas></div>
+  </div>
+  <div class="mt-3 flex justify-end">
+    <button id="replay" class="font-semibold underline underline-offset-4 hover:no-underline">Replay Crash</button>
+  </div>
+
+  <div id="hl" class="mt-4 max-w-3xl">
+    <h1 class="text-4xl sm:text-6xl font-bold leading-[1.02] tracking-tight">Break the scroll cycle. Forever free.</h1>
+    <p class="mt-5 text-lg sm:text-xl max-w-2xl">diamondBlock is a 100% free, open-source app blocker. Zero paywalls, no accounts, no tracking. Just you, taking your time back from the feed.</p>
+    <div class="mt-7 flex flex-col sm:flex-row gap-4">
+      <a id="download" href="https://github.com/Plasmixx/diamondBlock/releases" class="btn y shimmer"><i data-lucide="download" class="w-5 h-5 inline-block mr-2 align-[-4px]"></i>Download diamondBlock</a>
+      <a href="https://github.com/Plasmixx/diamondBlock" class="btn bg-white"><i data-lucide="git-branch" class="w-5 h-5 inline-block mr-2 align-[-4px]"></i>View Source on GitHub</a>
+    </div>
+  </div>
+</section>
+
+<section aria-label="Apps diamondBlock blocks" class="mb-16">
+  <div class="marquee"><div class="mq">
+    <span class="chip"><i data-lucide="music-2" class="w-5 h-5"></i>TikTok</span>
+    <span class="chip"><i data-lucide="clapperboard" class="w-5 h-5"></i>Instagram Reels</span>
+    <span class="chip"><i data-lucide="play" class="w-5 h-5"></i>YouTube Shorts</span>
+    <span class="chip"><i data-lucide="at-sign" class="w-5 h-5"></i>X</span>
+    <span class="chip"><i data-lucide="message-circle" class="w-5 h-5"></i>Reddit</span>
+    <span class="chip"><i data-lucide="ghost" class="w-5 h-5"></i>Snapchat</span>
+  </div></div>
+</section>
+
+<section id="features" class="max-w-6xl mx-auto px-4 pb-16">
+  <h2 class="text-3xl sm:text-4xl font-bold mb-8">Why diamondBlock</h2>
+  <div class="grid gap-6 md:grid-cols-3">
+    <article class="box p-6">
+      <div class="flex items-center justify-between mb-4"><svg class="w-10 h-10"><use href="#gem"/></svg><i data-lucide="lock-open" class="w-7 h-7"></i></div>
+      <h3 class="text-xl font-bold mb-2">Zero paywalls or Pro tiers</h3>
+      <p>Opal charges up to $99 a year. With diamondBlock, every focus schedule, strict block, and deep-work mode is unlocked for everyone from day one.</p>
+    </article>
+    <article id="open-source" class="box p-6">
+      <div class="flex items-center justify-between mb-4"><svg class="w-10 h-10"><use href="#gem"/></svg><i data-lucide="shield-check" class="w-7 h-7"></i></div>
+      <h3 class="text-xl font-bold mb-2">100% open source and local-first</h3>
+      <p>Audit every line of code on GitHub. Your screen-time data never leaves your device: no accounts, no analytics, no tracking.</p>
+    </article>
+    <article class="box p-6">
+      <div class="flex items-center justify-between mb-4"><svg class="w-10 h-10"><use href="#gem"/></svg><i data-lucide="timer" class="w-7 h-7"></i></div>
+      <h3 class="text-xl font-bold mb-2">Unbreakable focus modes</h3>
+      <p>Strict app locks, custom schedules, and intentional friction delays stop autopilot TikTok and Reels scrolling cold.</p>
+    </article>
+  </div>
+</section>
+
+<section id="donate" class="max-w-6xl mx-auto px-4 pb-20">
+  <div class="y border-2 border-[#0A0A0A] p-7 sm:p-12" style="box-shadow:8px 8px 0 #0A0A0A">
+    <h2 class="text-3xl sm:text-5xl font-bold max-w-2xl leading-tight">No tiers. No perks. Just support.</h2>
+    <p class="mt-5 text-lg max-w-2xl">diamondBlock is completely free and open source. Donating doesn't unlock secret features or special badges—you already have the full app. If diamondBlock saved your time, feel free to chip in to show support and help keep the project alive.</p>
+    <div class="mt-7 flex flex-col sm:flex-row sm:items-center gap-5">
+      <!-- TODO: replace # with your Buy Me a Coffee or Patreon link -->
+      <a id="support" href="#" class="btn bg-[#0A0A0A] !text-white" style="box-shadow:4px 4px 0 #fff"><i data-lucide="heart" class="w-5 h-5 inline-block mr-2 align-[-4px]"></i>Support diamondBlock</a>
+      <p class="font-medium max-w-sm">Donations offer no perks or advantages to anyone who gives, but they mean the world to us.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="border-t-2 border-[#0A0A0A]">
+  <div class="max-w-6xl mx-auto px-4 py-10 grid gap-8 md:grid-cols-3 text-sm">
+    <div>
+      <div class="flex items-center gap-2 disp font-bold text-lg"><svg class="w-7 h-7"><use href="#gem"/></svg>diamondBlock</div>
+      <p class="mt-2">diamondblock.org</p>
+    </div>
+    <div>
+      <p><a class="underline font-medium" href="https://github.com/Plasmixx/diamondBlock">GitHub repository</a></p>
+      <p class="mt-2">Released under the MIT License. Use it, fork it, improve it.</p>
+    </div>
+    <div>
+      <p class="font-semibold">Zero-tracking pledge</p>
+      <p class="mt-2">No accounts, no analytics, no ads. Your usage data stays on your device and this site sets no tracking cookies.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<script>
+(function(){
+  var cv=document.getElementById('cv'),ctx=cv.getContext('2d'),stage=document.getElementById('stage'),
+      wrap=document.getElementById('wrap'),hl=document.getElementById('hl'),
+      reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W,H,dpr,floor,lx,ls,carS,carX,speed,parts,streaks,phase,t0,logoOn,hit,raf;
+  var COLS=['#00E5FF','#FF2D95','#0A0A0A','#FFD600'];
+
+  function size(){
+    dpr=Math.min(devicePixelRatio||1,2);
+    W=stage.clientWidth;H=stage.clientHeight;
+    cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+    floor=H*0.82;ls=Math.min(H*0.5,W*0.3);lx=W*0.62;carS=Math.min(H/300,W/520)*1.15;
+  }
+
+  function track(){
+    ctx.fillStyle='#fff';ctx.fillRect(0,0,W,H);
+    ctx.fillStyle='#0A0A0A';ctx.fillRect(0,floor,W,H-floor);
+    ctx.fillStyle='#FFD600';
+    var off=(performance.now()*0.4)%60;
+    for(var x=-60+off;x<W;x+=60)ctx.fillRect(x,floor+(H-floor)/2-2,30,4);
+  }
+
+  function logo(){
+    var s=ls,x=lx-s/2,y=floor-s-8;
+    ctx.fillStyle='#0A0A0A';ctx.fillRect(x,y,s,s);
+    ctx.lineWidth=0;
+    function note(dx,dy,c){
+      ctx.strokeStyle=c;ctx.lineWidth=s*0.1;ctx.lineCap='butt';
+      var nx=x+s*0.5+dx,ny=y+s*0.2+dy;
+      ctx.beginPath();ctx.moveTo(nx,ny);ctx.lineTo(nx,y+s*0.62+dy);ctx.stroke();
+      ctx.beginPath();ctx.arc(nx-s*0.13,y+s*0.65+dy,s*0.13,0,Math.PI*2);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(nx,ny);ctx.quadraticCurveTo(nx+s*0.02,y+s*0.32+dy,nx+s*0.2,y+s*0.32+dy);ctx.stroke();
+    }
+    var d=s*0.035;note(-d,-d,'#00E5FF');note(d,d,'#FF2D95');note(0,0,'#fff');
+    ctx.strokeStyle='#0A0A0A';
+  }
+
+  function car(x){
+    var y=floor-4,s=carS;
+    ctx.save();ctx.translate(x,y);ctx.scale(s,s);
+    ctx.lineJoin='miter';ctx.lineWidth=3;ctx.strokeStyle='#0A0A0A';
+    // rear wing
+    ctx.fillStyle='#0A0A0A';ctx.fillRect(-92,-62,8,44);ctx.fillStyle='#FFD600';ctx.fillRect(-104,-66,30,10);ctx.strokeRect(-104,-66,30,10);
+    // body
+    ctx.fillStyle='#FFD600';ctx.beginPath();
+    ctx.moveTo(-86,-18);ctx.lineTo(-70,-40);ctx.lineTo(-30,-40);ctx.lineTo(-14,-56);ctx.lineTo(8,-56);ctx.lineTo(18,-38);
+    ctx.lineTo(80,-28);ctx.lineTo(98,-20);ctx.lineTo(98,-12);ctx.lineTo(-86,-12);ctx.closePath();ctx.fill();ctx.stroke();
+    // stripe + number
+    ctx.fillStyle='#0A0A0A';ctx.fillRect(-60,-30,70,6);
+    ctx.beginPath();ctx.moveTo(30,-34);ctx.lineTo(70,-28);ctx.lineTo(30,-28);ctx.fill();
+    // helmet
+    ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(-6,-58,9,0,Math.PI*2);ctx.fill();ctx.stroke();
+    // front wing
+    ctx.fillStyle='#0A0A0A';ctx.fillRect(84,-6,26,8);
+    // wheels
+    [[-56,0],[60,0]].forEach(function(w){
+      ctx.fillStyle='#0A0A0A';ctx.beginPath();ctx.arc(w[0],-14,18,0,Math.PI*2);ctx.fill();
+      ctx.fillStyle='#FFD600';ctx.beginPath();ctx.arc(w[0],-14,7,0,Math.PI*2);ctx.fill();
+    });
+    ctx.restore();
+  }
+
+  function shatter(){
+    var cy=floor-ls/2-8;parts=[];
+    for(var i=0;i<90;i++){
+      var a=Math.random()*Math.PI*2,sp=3+Math.random()*13;
+      parts.push({x:lx+(Math.random()-.5)*ls,y:cy+(Math.random()-.5)*ls,
+        vx:Math.cos(a)*sp+6,vy:Math.sin(a)*sp-4,r:Math.random()*6.28,vr:(Math.random()-.5)*.4,
+        s:5+Math.random()*(i<30?16:9),c:COLS[i%4],k:i%3===0?0:(i%3===1?1:2),life:1});
+    }
+  }
+
+  function drawPart(p){
+    ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.r);ctx.globalAlpha=Math.max(p.life,0);
+    ctx.fillStyle=p.c;ctx.strokeStyle='#0A0A0A';ctx.lineWidth=1.5;ctx.beginPath();
+    var s=p.s;
+    if(p.k===0){ctx.moveTo(0,-s);ctx.lineTo(s*.7,0);ctx.lineTo(0,s);ctx.lineTo(-s*.7,0);}
+    else if(p.k===1){ctx.moveTo(-s,s*.6);ctx.lineTo(s*.2,-s);ctx.lineTo(s,s*.4);}
+    else{ctx.moveTo(-s*.8,-s*.5);ctx.lineTo(s*.6,-s*.7);ctx.lineTo(s*.2,s*.8);}
+    ctx.closePath();ctx.fill();if(p.c!=='#0A0A0A')ctx.stroke();ctx.restore();
+  }
+
+  function impact(){
+    hit=true;logoOn=false;shatter();
+    wrap.classList.remove('shake');void wrap.offsetWidth;wrap.classList.add('shake');
+    hl.classList.add('on');
+    if(window.gsap)gsap.from('#hl > *',{y:26,opacity:0,duration:.6,stagger:.14,ease:'power3.out',clearProps:'all'});
+  }
+
+  var last=0;
+  function frame(now){
+    var dt=Math.min((now-last)/16.67,2.5);last=now;
+    track();
+    // speed streaks
+    for(var i=0;i<streaks.length;i++){
+      var s=streaks[i];s.x-=s.v*dt*(phase==='run'?1:.35);
+      if(s.x+s.l<0){s.x=W+Math.random()*80;s.y=floor-10-Math.random()*(floor*.85);}
+      ctx.fillStyle='rgba(10,10,10,'+(phase==='run'?.35:.12)+')';ctx.fillRect(s.x,s.y,s.l,2);
+    }
+    if(logoOn)logo();
+    if(phase==='run'){
+      carX+=speed*dt;speed=Math.min(speed+.5*dt,30);
+      if(!hit&&carX+98*carS>=lx-ls/2)impact();
+      if(carX-110*carS>W){phase='done';}
+    }
+    car(carX);
+    var alive=false;
+    for(var j=0;j<parts.length;j++){
+      var p=parts[j];
+      p.vy+=.55*dt;p.x+=p.vx*dt;p.y+=p.vy*dt;p.r+=p.vr*dt;p.vx*=.992;
+      if(p.y>floor-p.s*.4){p.y=floor-p.s*.4;p.vy*=-.45;p.vx*=.8;p.vr*=.8;}
+      if(p.x>W+20)p.vx=-Math.abs(p.vx)*.5;
+      p.life-=.0035*dt;
+      if(p.life>0){alive=true;drawPart(p);}
+    }
+    if(phase==='done'&&!alive){return;}
+    raf=requestAnimationFrame(frame);
+  }
+
+  function start(){
+    cancelAnimationFrame(raf);size();
+    parts=[];hit=false;logoOn=true;phase='run';speed=10;carX=-130*carS;
+    streaks=[];for(var i=0;i<22;i++)streaks.push({x:Math.random()*W,y:floor-10-Math.random()*floor*.85,l:30+Math.random()*90,v:12+Math.random()*16});
+    hl.classList.remove('on');
+    if(reduce){
+      logoOn=false;shatter();hit=true;phase='done';
+      track();parts.forEach(function(p){p.x=lx+(Math.random()-.5)*W*.7;p.y=floor-p.s*.4;p.life=1;drawPart(p)});
+      car(W*.85);hl.classList.add('on');return;
+    }
+    last=performance.now();raf=requestAnimationFrame(frame);
+  }
+
+  if(window.lucide)lucide.createIcons();
+  var mq=document.querySelector('.mq');
+  if(mq){var mc=mq.cloneNode(true);mc.setAttribute('aria-hidden','true');mq.parentNode.appendChild(mc);}
+  if(window.gsap&&window.ScrollTrigger&&!reduce){
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.from('#features article',{y:40,opacity:0,duration:.6,stagger:.15,ease:'power3.out',scrollTrigger:{trigger:'#features',start:'top 80%'}});
+    gsap.from('#donate > div',{scale:.96,opacity:0,duration:.6,ease:'power3.out',scrollTrigger:{trigger:'#donate',start:'top 85%'}});
+  }
+  var sp=document.getElementById('support');
+  if(sp)sp.addEventListener('click',function(e){
+    if(sp.getAttribute('href')==='#')e.preventDefault();
+    if(window.confetti&&!reduce){
+      var r=sp.getBoundingClientRect();
+      confetti({particleCount:90,spread:75,origin:{x:(r.left+r.width/2)/innerWidth,y:(r.top+r.height/2)/innerHeight},colors:['#FFD600','#0A0A0A','#00E5FF','#FF2D95'],shapes:['square'],scalar:1.1,ticks:200});
+    }
+  });
+  document.getElementById('replay').addEventListener('click',start);
+  var rt;addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){if(phase==='done'||reduce)start();else size();},200)});
+  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(start)}else{start()}
+})();
+</script>
+</body>
+</html>
