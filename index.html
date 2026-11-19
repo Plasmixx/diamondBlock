@@ -236,7 +236,7 @@ html.lenis,html.lenis body{height:auto}
 </select>
   <p id="problem" class="mt-4 text-3xl font-bold">?</p>
   <input id="answer" type="text" inputmode="text" placeholder="Your answer" autocomplete="off" class="mt-3 w-full border-2 border-[#0A0A0A] p-3 text-center text-lg font-semibold">
-<p class="mt-2 text-xs">You can type it normally, in LaTeX, or in words — e.g. 16x^15, $16x^{15}$, or "16 times x to the 15th" all count.</p>>
+<p class="mt-2 text-xs">You can type it normally, in LaTeX, or in words — e.g. 16x^15, $16x^{15}$, or "16 times x to the 15th" all count.</p>
   <button id="check-answer" type="button" class="btn bg-[#0A0A0A] !text-white w-full mt-4" style="box-shadow:4px 4px 0 #fff">Check answer</button>
   <button id="back-block" type="button" class="btn bg-white w-full mt-4">Back</button>
   <p id="solve-msg" class="mt-3 text-sm font-medium min-h-[2.5rem]" aria-live="polite"></p>
@@ -570,9 +570,6 @@ document.getElementById('check-answer').addEventListener('click',function(){
 });
 ans.addEventListener('keydown',function(e){if(e.key==='Enter')document.getElementById('check-answer').click();});
 document.getElementById('back-block').addEventListener('click',function(){s3.hidden=true;s2.hidden=false;});
-  if(parseInt(ans.value,10)===curAns){smsg.textContent='Correct — unlocked. Nice work.';if(window.confetti&&!reduce)confetti({particleCount:70,spread:70,origin:{y:.7},colors:['#FFD600','#0A0A0A','#00E5FF','#FF2D95'],shapes:['square'],zIndex:100});setTimeout(closeTT,1300);}
-  else{smsg.textContent='Not quite — try again.';ans.focus();}
-});
 ans.addEventListener('keydown',function(e){if(e.key==='Enter')document.getElementById('check-answer').click();});
 document.getElementById('back-block').addEventListener('click',function(){s3.hidden=true;s2.hidden=false;});
 /* Waitlist: no backend yet, so it opens the visitor's mail app */
