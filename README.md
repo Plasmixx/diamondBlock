@@ -6,3 +6,13 @@ I'm working on learning Swift so I can get this on iOS to try it, and our code w
 Users can choose to donate if they appreciate what we do. 
 
 Note for potential donors: please remember that you do not receive any in-app/physical reward for donating, it just means the world to us.
+
+Also please note that I am working on getting an official email for diamondBlock, the email that says hello@mocosignup.com is from a different one of my projects, and is merely a placeholder until I purchase the domain (diamondBlock.org) and register an official email, which will be help@diamondblock.org.
+
+We are also open to comments and suggestions and we greatly appreciate any feedback on how you think we could make our app better for everyone.
+
+PLEASE NOTE: Our only official email for support is help@diamondblock.org, we do not use any other email, and if you see a different one, then it is most likely a scam/phishing.
+
+Thanks for reading!!!
+
+You can read about me @ aboutme.mocosignup.com :)
