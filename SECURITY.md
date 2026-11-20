@@ -39,4 +39,4 @@ We consider vulnerabilities related to:
 - Data exposure  
 - Integrity or reliability of the blocking engine  
 
-Non-security bugs (UI issues, feature requests, performance problems) should be reported through the standard issue tracker.
+Non-security bugs (UI issues, feature requests, performance problems) should be reported through the standard issue tracker.)
