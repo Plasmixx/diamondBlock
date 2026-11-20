@@ -249,6 +249,9 @@ html.lenis,html.lenis body{height:auto}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+var supabaseClient = supabase.createClient('https://xdzchfkvxueicmcyupmm.supabase.co', 'sb_publishable_Idgd0qDaVTj5WjxdIlVXNg_MdsOWYLk');
 <script>
 (function(){
   var cv=document.getElementById('cv'),ctx=cv.getContext('2d'),stage=document.getElementById('stage'),
@@ -574,7 +577,7 @@ ans.addEventListener('keydown',function(e){if(e.key==='Enter')document.getElemen
 document.getElementById('back-block').addEventListener('click',function(){s3.hidden=true;s2.hidden=false;});
 /* Waitlist: no backend yet, so it opens the visitor's mail app */
 var wf=document.getElementById('waitlist-form');
-if(wf)wf.addEventListener('submit',function(e){e.preventDefault();var em=document.getElementById('waitlist-email').value.trim();if(!em)return;window.location.href='mailto:hello@mocosignup.com?subject=diamondBlock%20waitlist&body=Please%20add%20'+encodeURIComponent(em)+'%20to%20the%20diamondBlock%20waitlist.';document.getElementById('waitlist-msg').textContent='Thanks — your mail app should open. Hit send to join the waitlist.';});
+if(wf)wf.addEventListener('submit',async function(e){e.preventDefault();var em=document.getElementById('waitlist-email').value.trim();if(!em)return;var msg=document.getElementById('waitlist-msg');var r=await supabaseClient.from('waitlist_emails').insert({email:em});if(r.error&&r.error.code==='23505'){msg.textContent='You are already on the list.';}else if(r.error){msg.textContent='Something went wrong — try again.';}else{msg.textContent='You are on the list. We will email you when it drops.';document.getElementById('waitlist-email').value='';}});
   var sp=document.getElementById('support');
   if(sp)sp.addEventListener('click',function(e){
     if(sp.getAttribute('href')==='#')e.preventDefault();
