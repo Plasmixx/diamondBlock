@@ -6,8 +6,8 @@ The following versions of this project currently receive security updates.
 
 | Version        | Supported |
 | -------------- | ---------- |
-| v1.1.0-beta   | ✔️ |
-| < v1.1.0-beta | ❌ |
+| **v1.1.0-beta**   | ✔️ |
+| **< v1.1.0-beta** | ❌ |
 
 ## Reporting a Vulnerability
 
