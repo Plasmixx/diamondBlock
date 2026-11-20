@@ -9,6 +9,8 @@ Note for potential donors: please remember that you do not receive any in-app/ph
 
 Also please note that I am working on getting an official email for diamondBlock, the email that says hello@mocosignup.com is from a different one of my projects, and is merely a placeholder until I purchase the domain (diamondBlock.org) and register an official email, which will be help@diamondblock.org.
 
+# Patch notes: I just purchased diamondblock.org and the email help@diamondblock.org now exists. That is our official email.
+
 We are also open to comments and suggestions and we greatly appreciate any feedback on how you think we could make our app better for everyone.
 
 PLEASE NOTE: Our only official email for support is help@diamondblock.org, we do not use any other email, and if you see a different one, then it is most likely a scam/phishing.
