@@ -14,7 +14,7 @@ The following versions of this project currently receive security updates.
 If you discover a security vulnerability, please report it responsibly so we can keep users safe.
 
 ### How to report
-Send all security-related reports to **help@mocosignup.com**.
+Send all security-related reports to **security@diamondblock.org**.
 You may also submit a private GitHub Security Advisory through the repository’s Security tab.
 
 ### What to include
