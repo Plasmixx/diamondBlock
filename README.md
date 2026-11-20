@@ -7,7 +7,7 @@ Users can choose to donate if they appreciate what we do.
 
 Note for potential donors: please remember that you do not receive any in-app/physical reward for donating, it just means the world to us.
 
-NO LONGER APPLICABLE: Also please note that I am working on getting an official email for diamondBlock, the email that says hello@mocosignup.com is from a different one of my projects, and is merely a placeholder until I purchase the domain (diamondBlock.org) and register an official email, which will be help@diamondblock.org.
+**NO LONGER APPLICABLE**: Also please note that I am working on getting an official email for diamondBlock, the email that says hello@mocosignup.com is from a different one of my projects, and is merely a placeholder until I purchase the domain (diamondBlock.org) and register an official email, which will be help@diamondblock.org.
 
 **Patch notes: I just purchased diamondblock.org and the email help@diamondblock.org now exists. That is our official email.**
 
