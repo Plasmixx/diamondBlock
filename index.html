@@ -258,10 +258,16 @@ html.lenis,html.lenis body{height:auto}
   <div class="box p-7 sm:p-12">
     <h2 class="text-3xl sm:text-4xl font-bold">Coming soon — join the waitlist</h2>
     <p class="mt-4 text-lg max-w-2xl">There's no download yet. Leave your email and we'll tell you when the first version is ready for iOS and Android.</p>
-    <form id="waitlist-form" class="mt-6 flex flex-col sm:flex-row gap-4 max-w-xl">
-      <input id="waitlist-email" type="email" required placeholder="you@example.com" class="flex-1 border-2 border-[#0A0A0A] p-3 font-medium">
-      <button type="submit" class="btn y">Notify me</button>
-    </form>
+    <form id="waitlist-form" class="mt-6 flex flex-col gap-4 max-w-xl">
+  <div class="flex flex-col sm:flex-row gap-4">
+    <input id="waitlist-email" type="email" required placeholder="you@example.com" class="flex-1 border-2 border-[#0A0A0A] p-3 font-medium">
+    <button type="submit" class="btn y">Notify me</button>
+  </div>
+  <label class="flex items-start gap-2 text-sm font-medium">
+    <input id="waitlist-age" type="checkbox" required class="mt-1">
+    <span>I am 13 or older, or I am a parent/guardian signing up.</span>
+  </label>
+</form>
     <p id="waitlist-msg" class="mt-3 text-sm font-medium" aria-live="polite"></p>
   </div>
 </section>
