@@ -16,9 +16,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://diamondblock.org/og-image.png">
 <meta name="color-scheme" content="light">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/fonts.css">
 <script src="https://cdn.tailwindcss.com/3.4.17"></script>
 <style>
 :root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -659,7 +657,7 @@ ans.addEventListener('keydown',function(e){if(e.key==='Enter')document.getElemen
 document.getElementById('back-block').addEventListener('click',function(){s3.hidden=true;s2.hidden=false;});
 /* Waitlist: no backend yet, so it opens the visitor's mail app */
 var wf=document.getElementById('waitlist-form');
-if(wf)wf.addEventListener('submit',async function(e){e.preventDefault();var em=document.getElementById('waitlist-email').value.trim();if(!em)return;var msg=document.getElementById('waitlist-msg');var r=await supabaseClient.from('waitlist_emails').insert({email:em});if(r.error&&r.error.code==='23505'){msg.textContent='You are already on the list.';}else if(r.error){msg.textContent='Something went wrong — try again.';}else{msg.textContent='You are on the list. We will email you when it drops.';document.getElementById('waitlist-email').value='';}});
+if(wf)wf.addEventListener('submit',async function(e){e.preventDefault();var em=document.getElementById('waitlist-email').value.trim();if(!em)return;var msg=document.getElementById('waitlist-msg');if(!document.getElementById('waitlist-age').checked){msg.textContent='Please confirm you are 13 or older, or a parent signing up.';return;}var r=await supabaseClient.from('waitlist_emails').insert({email:em});if(r.error&&r.error.code==='23505'){msg.textContent='You are already on the list.';}else if(r.error){msg.textContent='Something went wrong — try again.';}else{msg.textContent='You are on the list. We will email you when it drops.';document.getElementById('waitlist-email').value='';}});
   var sp=document.getElementById('support');
   if(sp)sp.addEventListener('click',function(e){
     if(sp.getAttribute('href')==='#')e.preventDefault();
