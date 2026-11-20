@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="description" content="The diamondBlock Privacy Policy — what we collect, what we never collect, how Apple's Family Controls works here, and how to delete your data." />
+    <link rel="icon" href="data:," />
+    <title>diamondBlock Privacy Policy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Black&display=swap" rel="stylesheet" />
+    <style>
+      button, [role="button"], select, summary, input:not([type="checkbox"], [type="radio"]) { min-height: 2rem; }
+      a { min-height: 2rem; }
+    </style>
+    <style>
+      :root {
+        --bg: #ffffff;
+        --ink: #0a0a0a;
+        --muted: #3d3d3d;
+        --paper: #ffffff;
+        --yellow: #ffd21f;
+        --yellow-soft: #fff3b0;
+        --border: #0a0a0a;
+        --shadow: #0a0a0a;
+        --chip: #f1f1ee;
+        --link: #0a0a0a;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #121212;
+          --ink: #f7f7f2;
+          --muted: #c9c9c2;
+          --paper: #1d1d1d;
+          --yellow: #ffd21f;
+          --yellow-soft: #3a3203;
+          --border: #f7f7f2;
+          --shadow: #ffd21f;
+          --chip: #262626;
+          --link: #ffd21f;
+        }
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+        font-size: 17px;
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+      }
+      a { color: var(--link); font-weight: 600; text-underline-offset: 3px; display: inline-flex; align-items: center; }
+      a:hover { text-decoration-thickness: 2px; }
+      .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+      /* Top breadcrumb */
+      .topbar {
+        border-bottom: 3px solid var(--border);
+        padding: 14px 0;
+      }
+      .topbar .wrap { display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: center; justify-content: space-between; }
+      .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 900; font-size: 19px; text-decoration: none; min-height: 44px; }
+      .brand svg { width: 30px; height: 30px; flex: none; }
+      .top-links { display: flex; flex-wrap: wrap; gap: 4px 20px; }
+      .top-links a { min-height: 44px; font-size: 15px; }
+
+      /* Header */
+      header.policy-head { padding: 44px 0 8px; }
+      .kicker {
+        display: inline-block; background: var(--yellow); color: #0a0a0a;
+        border: 2px solid #0a0a0a; padding: 5px 12px; font-weight: 800; font-size: 13px;
+        letter-spacing: .08em; text-transform: uppercase; box-shadow: 4px 4px 0 var(--shadow);
+      }
+      @media (prefers-color-scheme: dark) { .kicker { border-color: var(--border); } }
+      h1 {
+        font-family: "Archivo Black", "Archivo", sans-serif;
+        font-size: clamp(38px, 7vw, 64px); line-height: 1.02; margin: 22px 0 16px; letter-spacing: -0.01em;
+      }
+      .lede { font-size: clamp(18px, 2.6vw, 21px); max-width: 46em; color: var(--muted); margin: 0; }
+      .meta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+      .meta-chip {
+        background: var(--chip); border: 2px solid var(--border); padding: 8px 14px;
+        font-size: 14px; font-weight: 700;
+      }
+      .meta-chip strong { font-weight: 900; }
+
+      /* Summary box */
+      .summary-box {
+        background: var(--yellow-soft); border: 3px solid var(--border);
+        box-shadow: 8px 8px 0 var(--shadow); padding: 26px 26px 20px; margin: 36px 0 8px;
+      }
+      .summary-box h2 { margin: 0 0 10px; font-size: 24px; font-weight: 900; }
+      .summary-box p { margin: 0 0 12px; max-width: 52em; }
+      .summary-box ul { margin: 0; padding-left: 22px; }
+      .summary-box li { margin: 6px 0; }
+
+      /* Layout */
+      .layout { display: grid; gap: 40px; padding: 36px 0 20px; }
+      @media (min-width: 900px) {
+        .layout { grid-template-columns: 250px minmax(0, 1fr); align-items: start; }
+      }
+      nav.toc {
+        border: 3px solid var(--border); background: var(--paper);
+        box-shadow: 6px 6px 0 var(--shadow); padding: 18px 18px 10px;
+      }
+      @media (min-width: 900px) { nav.toc { position: sticky; top: 20px; } }
+      nav.toc h2 { font-size: 14px; letter-spacing: .08em; text-transform: uppercase; margin: 0 0 8px; font-weight: 900; }
+      nav.toc ol { margin: 0; padding-left: 20px; }
+      nav.toc li { margin: 2px 0; }
+      nav.toc a { font-size: 15px; font-weight: 600; min-height: 36px; text-decoration: none; }
+      nav.toc a:hover { text-decoration: underline; }
+
+      section.policy { scroll-margin-top: 24px; margin-bottom: 44px; }
+      section.policy > h2 {
+        font-size: clamp(24px, 4vw, 31px); font-weight: 900; line-height: 1.15;
+        margin: 0 0 6px; display: flex; gap: 14px; align-items: baseline;
+      }
+      section.policy > h2 .num {
+        background: var(--ink); color: var(--bg); font-size: 16px; font-weight: 900;
+        padding: 4px 10px; flex: none; transform: translateY(-2px);
+      }
+      section.policy h3 { font-size: 19px; font-weight: 800; margin: 24px 0 6px; }
+      section.policy p { margin: 10px 0; max-width: 52em; }
+      section.policy ul { margin: 8px 0 14px; padding-left: 22px; max-width: 52em; }
+      section.policy li { margin: 6px 0; }
+
+      .box {
+        background: var(--paper); border: 3px solid var(--border);
+        box-shadow: 6px 6px 0 var(--shadow); padding: 22px; margin: 18px 0;
+      }
+      .box h3 { margin-top: 0; }
+      .box p:last-child, .box ul:last-child { margin-bottom: 0; }
+
+      .never-grid { display: grid; gap: 16px; margin: 18px 0; }
+      @media (min-width: 640px) { .never-grid { grid-template-columns: 1fr 1fr; } }
+      .never-item { border: 3px solid var(--border); background: var(--paper); box-shadow: 5px 5px 0 var(--shadow); padding: 16px 18px; }
+      .never-item strong { display: block; font-size: 17px; margin-bottom: 2px; }
+      .never-item span { color: var(--muted); font-size: 15.5px; }
+
+      .glance { display: grid; gap: 16px; margin: 18px 0; }
+      @media (min-width: 720px) { .glance { grid-template-columns: repeat(3, 1fr); } }
+      .glance .box { margin: 0; }
+      .glance .tag { display: inline-block; background: var(--yellow); color: #0a0a0a; border: 2px solid #0a0a0a; font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; padding: 3px 9px; margin-bottom: 10px; }
+      .glance h3 { font-size: 18px; margin: 0 0 6px; }
+      .glance p { font-size: 15.5px; margin: 6px 0; }
+
+      .contact-grid { display: grid; gap: 16px; margin: 18px 0; grid-template-columns: minmax(0, 1fr); }
+      .contact-card { border: 3px solid var(--border); background: var(--paper); box-shadow: 5px 5px 0 var(--shadow); padding: 18px; }
+      .contact-card strong { display: block; font-size: 16px; margin-bottom: 4px; }
+      .contact-card p { font-size: 15px; color: var(--muted); margin: 0 0 8px; }
+      .contact-card a { overflow-wrap: anywhere; font-size: 15.5px; }
+
+      .btn {
+        display: inline-flex; align-items: center; justify-content: center; min-height: 48px;
+        background: var(--yellow); color: #0a0a0a; border: 3px solid #0a0a0a;
+        box-shadow: 5px 5px 0 var(--shadow); padding: 10px 20px; font-weight: 800;
+        text-decoration: none; font-size: 16px;
+      }
+      .btn:active { transform: translate(3px, 3px); box-shadow: 2px 2px 0 var(--shadow); }
+
+      footer {
+        border-top: 3px solid var(--border); margin-top: 30px; padding: 28px 0 44px;
+      }
+      footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 34px; justify-content: space-between; }
+      footer p { margin: 4px 0; font-size: 15px; color: var(--muted); max-width: 34em; }
+      footer .foot-links { display: flex; flex-direction: column; gap: 2px; }
+      footer .foot-links a { min-height: 36px; font-size: 15px; }
+      @media print {
+        nav.toc { position: static; box-shadow: none; }
+        .box, .summary-box, .never-item, .contact-card { box-shadow: none; }
+        body { font-size: 12pt; }
+      }
+    </style>
+  </head>
+  <body>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <symbol id="gem" viewBox="0 0 24 24">
+        <path d="M6 3h12l3 5-9 13L3 8l3-5Z" fill="#38bdf8" stroke="#0a0a0a" stroke-width="1.6" stroke-linejoin="round"/>
+        <path d="M3 8h18M6 3l3 5 3-5 3 5 3-5M9 8l3 13L15 8" fill="none" stroke="#0a0a0a" stroke-width="1.2" stroke-linejoin="round"/>
+      </symbol>
+    </svg>
+
+    <div class="topbar">
+      <div class="wrap">
+        <a class="brand" href="https://diamondblock.org"><svg aria-hidden="true"><use href="#gem"/></svg>diamondBlock</a>
+        <div class="top-links">
+          <a href="https://diamondblock.org">diamondblock.org</a>
+          <a href="mailto:help@diamondblock.org">help@diamondblock.org</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <header class="policy-head">
+        <span class="kicker">diamondBlock</span>
+        <h1>Privacy Policy</h1>
+        <p class="lede">diamondBlock is a free, open-source screen-time app for families and for your own focus, built with Apple's Family Controls. This policy explains — in plain English first, and in full below — what we collect, what we never collect, and how you can delete your data.</p>
+        <div class="meta-row">
+          <span class="meta-chip"><strong>Last updated:</strong> November 19, 2026</span>
+          <span class="meta-chip"><strong>Applies to:</strong> diamondblock.org, the waitlist, and the diamondBlock app when it launches</span>
+        </div>
+
+        <div class="summary-box">
+          <h2>The short version</h2>
+          <p><strong>Where things stand:</strong> right now, only the website and the waitlist are live — the app hasn't launched yet. The sections below about accounts and Family Controls describe how the app will handle information when it launches, and they will apply from launch day.</p>
+          <ul>
+            <li><strong>We collect very little:</strong> your email address if you join the waitlist or create an account, and your app settings — like your math level — so the unlock problems match you.</li>
+            <li><strong>We never</strong> sell your data, show ads, track your location, or read what's inside your apps, messages, photos, or browsing history.</li>
+            <li><strong>Blocking happens on your device.</strong> Apple's Family Controls permission stays on the device — Apple does not send us your app usage, and neither do we.</li>
+            <li><strong>You're in control:</strong> email <a href="mailto:help@diamondblock.org">help@diamondblock.org</a> at any time to see, correct, or delete your information.</li>
+          </ul>
+        </div>
+      </header>
+
+      <div class="layout">
+        <nav class="toc" aria-label="Privacy Policy contents">
+          <h2>On this page</h2>
+          <ol>
+            <li><a href="#who">Who we are</a></li>
+            <li><a href="#collect">What we collect</a></li>
+            <li><a href="#never">What we never collect</a></li>
+            <li><a href="#family-controls">Family Controls</a></li>
+            <li><a href="#use">How we use it</a></li>
+            <li><a href="#sharing">Sharing &amp; selling</a></li>
+            <li><a href="#storage">Storage &amp; security</a></li>
+            <li><a href="#cookies">Cookies &amp; tracking</a></li>
+            <li><a href="#children">Children &amp; families</a></li>
+            <li><a href="#schools">diamondBlock for Schools</a></li>
+            <li><a href="#rights">Your choices &amp; rights</a></li>
+            <li><a href="#payments">Donations &amp; payments</a></li>
+            <li><a href="#changes">Changes to this policy</a></li>
+            <li><a href="#contact">Contact us</a></li>
+          </ol>
+        </nav>
+
+        <main>
+          <section class="policy" id="who">
+            <h2><span class="num">1</span> Who we are</h2>
+            <p>diamondBlock is a free, open-source, non-profit app blocker. It helps people set limits on their own phones, and it helps parents set limits on a child's iPhone or iPad using Apple's Family Controls. Every feature is free for everyone — there are no Pro tiers, and donations never unlock anything.</p>
+            <p>diamondBlock is the “we” in this policy. Our website is <a href="https://diamondblock.org">diamondblock.org</a>, and our app code is public under the MIT license at <a href="https://github.com/Plasmixx/diamondBlock">github.com/Plasmixx/diamondBlock</a> — anyone can read exactly what the app does.</p>
+          </section>
+
+          <section class="policy" id="collect">
+            <h2><span class="num">2</span> What we collect</h2>
+            <p>Only what the app and website need to work. Nothing more.</p>
+
+            <div class="glance">
+              <div class="box">
+                <span class="tag">Waitlist</span>
+                <h3>Your email address</h3>
+                <p>If you join the waitlist on diamondblock.org, we store your email address, the date you signed up, and that you came from the landing page.</p>
+                <p><strong>Why:</strong> to send you one email when the first version launches.</p>
+              </div>
+              <div class="box">
+                <span class="tag">Account</span>
+                <h3>Account &amp; settings</h3>
+                <p>If you create an account, we store your account details and the settings the app needs to personalise your experience — for example, your math level, so unlock problems match you.</p>
+                <p><strong>Why:</strong> so your settings are saved and your problems are at the right level.</p>
+              </div>
+              <div class="box">
+                <span class="tag">Support</span>
+                <h3>Emails you send us</h3>
+                <p>If you email us, we keep that conversation so we can answer you and follow up.</p>
+                <p><strong>Why:</strong> to help you. We don't use support emails for advertising.</p>
+              </div>
+            </div>
+
+            <p>That's the list. If a future feature ever needs a new kind of information, we will update this policy before that feature launches.</p>
+          </section>
+
+          <section class="policy" id="never">
+            <h2><span class="num">3</span> What we never collect</h2>
+            <p>This matters as much as what we do collect, so here it is plainly:</p>
+            <div class="never-grid">
+              <div class="never-item"><strong>What's inside your apps</strong><span>We never read your messages, posts, or activity inside other apps.</span></div>
+              <div class="never-item"><strong>Your photos &amp; files</strong><span>We never access or upload your photos, videos, or documents.</span></div>
+              <div class="never-item"><strong>Your browsing history</strong><span>We never see which websites you visit.</span></div>
+              <div class="never-item"><strong>Your location</strong><span>We never track where you are or where you've been.</span></div>
+              <div class="never-item"><strong>Your contacts</strong><span>We never upload your address book.</span></div>
+              <div class="never-item"><strong>Advertising data</strong><span>No ad profiles, no data brokers, no behavioural tracking.</span></div>
+            </div>
+            <p>Parents only see the limits they set — not what a child does inside an app. diamondBlock is built for families and for your own screen time. It is never for monitoring employees or other adults.</p>
+          </section>
+
+          <section class="policy" id="family-controls">
+            <h2><span class="num">4</span> How Family Controls works here</h2>
+            <p>diamondBlock uses Apple's Family Controls system to block apps and set time limits. That permission stays on your device:</p>
+            <ul>
+              <li>Which apps are blocked, and when, is decided on the device by you — or, for a child, by a parent.</li>
+              <li>Apple does not send us your child's app usage, and the blocking itself does not send us a feed of what anyone is doing on their phone.</li>
+              <li>Calling and Messages are always unblockable in diamondBlock, so a call to a parent or to emergency services is never behind a problem set.</li>
+              <li>You can remove the Family Controls permission at any time in iOS Settings, which stops diamondBlock from blocking anything.</li>
+            </ul>
+          </section>
+
+          <section class="policy" id="use">
+            <h2><span class="num">5</span> How we use your information</h2>
+            <ul>
+              <li><strong>To run the waitlist</strong> — email you when diamondBlock launches.</li>
+              <li><strong>To run your account</strong> — save your settings, like your math level, so the app works the way you set it up.</li>
+              <li><strong>To answer you</strong> — reply to support, security, and school enquiries sent to our email addresses.</li>
+              <li><strong>To keep the service safe</strong> — prevent abuse of the waitlist and accounts, such as spam sign-ups.</li>
+            </ul>
+            <p>We do not use your information for advertising, and we do not build profiles about you.</p>
+          </section>
+
+          <section class="policy" id="sharing">
+            <h2><span class="num">6</span> Sharing &amp; selling</h2>
+            <div class="box">
+              <h3>We never sell your data. Ever.</h3>
+              <p>We don't sell, rent, or trade your email address or account information to anyone, for any reason. There are no advertisers in diamondBlock.</p>
+            </div>
+            <p>The only sharing that happens is with the service providers that make diamondBlock run — for example, Supabase, which hosts our waitlist and account database. They store the data on our behalf, only so the service works, and they don't get to use it for their own purposes.</p>
+            <p>The one exception to any privacy promise: if the law genuinely requires us to disclose information (for example, a valid court order), we would have to comply. We would only share the minimum required.</p>
+          </section>
+
+          <section class="policy" id="storage">
+            <h2><span class="num">7</span> Where data is stored &amp; how we protect it</h2>
+            <ul>
+              <li>Waitlist emails and account data are stored in our Supabase database.</li>
+              <li>The waitlist is set up so the public can only add an email — not read the list. The list of everyone's emails is not public.</li>
+              <li>Blocking rules and Family Controls data stay on your device, under Apple's system.</li>
+              <li>We use passwords and access controls so only the people running diamondBlock can reach stored data, and only to operate the service.</li>
+            </ul>
+            <p>No system is perfectly secure, but because we collect so little, there is very little to lose. If we ever learn of a breach affecting your information, we will email the people affected and explain what happened and what we did about it. Security problems can also be reported to <a href="mailto:security@diamondblock.org">security@diamondblock.org</a>.</p>
+            <p><strong>How long we keep it:</strong> waitlist emails are kept until launch emails are sent and you ask us to delete yours, or until the waitlist closes. Account information is kept while your account exists. Support emails are kept as long as we need them to help you. When you ask us to delete your data, we delete it — see <a href="#rights">Your choices &amp; rights</a>.</p>
+          </section>
+
+          <section class="policy" id="cookies">
+            <h2><span class="num">8</span> Cookies &amp; tracking on this website</h2>
+            <p>diamondblock.org does not use tracking cookies, advertising cookies, or third-party analytics that follow you around the web. We don't need them — the site's job is to explain the app and run the waitlist form.</p>
+            <p>If that ever changes, this policy will be updated first, and anything non-essential will be opt-in.</p>
+          </section>
+
+          <section class="policy" id="children">
+            <h2><span class="num">9</span> Children &amp; families</h2>
+            <p>diamondBlock is designed for families, so this part matters:</p>
+            <ul>
+              <li>A parent sets up the limits on a child's device using Apple's Family Controls. No separate tracking app is installed on the child's phone.</li>
+              <li>A child does not need their own diamondBlock account to be protected by a parent's limits.</li>
+              <li>We do not collect a child's messages, photos, location, browsing history, or activity inside apps — for children or for anyone.</li>
+              <li>Calling and Messages can never be blocked, and every user starts with 3 emergency exit keys, which are never for sale.</li>
+            </ul>
+            <p>If you're a parent and you believe your child gave us an email address or account information without your involvement, email <a href="mailto:help@diamondblock.org">help@diamondblock.org</a> and we will delete it.</p>
+          </section>
+
+          <section class="policy" id="schools">
+            <h2><span class="num">10</span> diamondBlock for Schools</h2>
+            <p>diamondBlock for Schools is a planned version of the app, not yet launched. When it launches, this is how it will handle information — and this section will be updated with any details before schools start using it:</p>
+            <ul>
+              <li>Students register with a school ID, and the app knows their math and English level so questions match them.</li>
+              <li>Teachers create questions and choose the unlock rules (5 correct in a row, or 12 correct in total), whether hints are on, and how long an unlock lasts.</li>
+              <li>Teacher tools only work during the school hours set by the school's administrator when the school registers. Outside those hours, the tools are unavailable.</li>
+              <li>Calling and Messages stay unblockable for students, always, and emergency exit keys still exist.</li>
+              <li>We will never sell student data or use it for advertising.</li>
+            </ul>
+            <p>Schools with questions about student privacy can reach us at <a href="mailto:outreach@diamondblock.org">outreach@diamondblock.org</a>.</p>
+          </section>
+
+          <section class="policy" id="rights">
+            <h2><span class="num">11</span> Your choices &amp; rights</h2>
+            <p>Your information belongs to you. At any time, you can:</p>
+            <ul>
+              <li><strong>Ask what we have</strong> — email us and we'll tell you what we hold about you.</li>
+              <li><strong>Fix it</strong> — if your email or account details are wrong, we'll correct them.</li>
+              <li><strong>Delete it</strong> — ask us to delete your waitlist email or your account, and we will.</li>
+              <li><strong>Leave the waitlist</strong> — one email to us, or the unsubscribe link in any waitlist email, and you're off the list.</li>
+              <li><strong>Remove the app's permission</strong> — turn off Family Controls for diamondBlock in iOS Settings at any time.</li>
+            </ul>
+            <p>Send any of these requests to <a href="mailto:help@diamondblock.org">help@diamondblock.org</a>. We may need to confirm the request came from the email address on file, so we don't delete someone else's data by mistake.</p>
+          </section>
+
+          <section class="policy" id="payments">
+            <h2><span class="num">12</span> Donations &amp; payments</h2>
+            <p>diamondBlock is free, and donations are optional support for the project — they never unlock features. Online donations aren't set up yet. When a donation service is enabled, any payment will be handled by that service under its own privacy policy, and this section will be updated to name it. diamondBlock will not receive or store your full card number.</p>
+          </section>
+
+          <section class="policy" id="changes">
+            <h2><span class="num">13</span> Changes to this policy</h2>
+            <p>If we change this policy, we will update the “Last updated” date at the top of this page and post the new version here, at the same address. If a change is significant — for example, if a new feature needs a new kind of data — we will say so clearly at the top of the page, and email waitlist and account holders where we can.</p>
+            <p>Older versions will be available on request from <a href="mailto:help@diamondblock.org">help@diamondblock.org</a>, so you can always see what changed.</p>
+          </section>
+
+          <section class="policy" id="contact">
+            <h2><span class="num">14</span> Contact us</h2>
+            <p>Questions about this policy, or a request about your own data? Email us — a real person reads these inboxes.</p>
+            <div class="contact-grid">
+              <div class="contact-card">
+                <strong>Help &amp; privacy requests</strong>
+                <p>Data requests, deletions, and general questions.</p>
+                <a href="mailto:help@diamondblock.org">help@diamondblock.org</a>
+              </div>
+              <div class="contact-card">
+                <strong>Security</strong>
+                <p>Report a vulnerability or a security problem.</p>
+                <a href="mailto:security@diamondblock.org">security@diamondblock.org</a>
+              </div>
+              <div class="contact-card">
+                <strong>Schools &amp; partnerships</strong>
+                <p>Questions from teachers and schools.</p>
+                <a href="mailto:outreach@diamondblock.org">outreach@diamondblock.org</a>
+              </div>
+            </div>
+            <a class="btn" href="mailto:help@diamondblock.org?subject=Privacy%20question%20about%20diamondBlock">Email us a privacy question</a>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <footer>
+      <div class="wrap">
+        <div>
+          <a class="brand" href="https://diamondblock.org"><svg aria-hidden="true"><use href="#gem"/></svg>diamondBlock</a>
+          <p>A free, open-source screen-time app for families and for yourself. No ads. No selling your data. No paywalls.</p>
+        </div>
+        <div class="foot-links">
+          <a href="https://diamondblock.org">diamondblock.org</a>
+          <a href="https://github.com/Plasmixx/diamondBlock">Open-source code on GitHub</a>
+          <a href="mailto:help@diamondblock.org">help@diamondblock.org</a>
+          <a href="#who">Back to top</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
