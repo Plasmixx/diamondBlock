@@ -1,5 +1,4 @@
-/* diamondBlock self-hosted fonts — no Google Fonts, no IP sent to Google.
-   Upload this file as fonts.css in the repo root, and the .woff2 files in fonts/ */
+/* diamondBlock self-hosted fonts, we don't use Google Fonts, because that sends the IP addresses of our users to Google, which some are uncomfortable with. */
 @font-face {
   font-family: 'Inter';
   font-style: normal;
