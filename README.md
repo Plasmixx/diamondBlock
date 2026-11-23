@@ -14,6 +14,8 @@ Note for potential donors: please remember that you do not receive any in-app/ph
 
 We are also open to comments and suggestions and we greatly appreciate any feedback on how you think we could make our app better for everyone.
 
+I also wanted to mention; the only date format that we use is mm/dd/yy.
+
 **PLEASE NOTE: Our only official email for support is help@diamondblock.org, we do not use any other email, and if you see a different one, then it is most likely a scam/phishing email.** (our other emails are outreach@diamondblock.org and security@diamondblock.org, so if you get an email from one of those, it's real, just odd, because I don't send emails on those accounts, except for outreach which I only send emails to institutions on.)
 
 Thanks for reading!!!
